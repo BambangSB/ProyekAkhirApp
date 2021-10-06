@@ -38,19 +38,23 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/btn_masuk"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="Masuk" />
+            android:background="@drawable/custom_button_1"
+            android:text="Masuk"
+            android:textColor="@color/white"
+            android:textAllCaps="false"/>
 
-        <TextView
-            android:layout_marginTop="16dp"
+        <Button
             android:id="@+id/btn_daftar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contextClickable="true"
-            android:text="Daftar" />
+            android:text="Daftar"
+            android:textAllCaps="false"
+            style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
 
     </LinearLayout>
 

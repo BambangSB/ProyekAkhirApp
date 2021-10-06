@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Proyek Akhir Monitoring Porang</string>
+    <string name="title_activity_bottom_nav">MainActivity</string>
+    <string name="title_monitoring">Monitoring</string>
+    <string name="title_catat">Catat</string>
+    <string name="title_riwayat">Riwayat</string>
+    <string name="title_hasil">Hasil</string>
+    <string name="title_profil">Profil</string>
 </resources>

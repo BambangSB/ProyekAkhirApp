@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyekAkhirMonitoringPorang">
+        <activity
+            android:name=".BottomNav"
+            android:label="@string/title_activity_bottom_nav"></activity>
         <activity android:name=".WellcomeScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,9 +23,7 @@
         <activity android:name=".NotifikasiActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SingupActivity" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

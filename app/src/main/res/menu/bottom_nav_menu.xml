@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_monitoring"
+        android:icon="@drawable/ic_baseline_monitor_24"
+        android:title="@string/title_monitoring" />
+
+    <item
+        android:id="@+id/navigation_riwayat"
+        android:icon="@drawable/ic_baseline_history_24"
+        android:title="@string/title_riwayat" />
+
+    <item
+        android:id="@+id/navigation_catat"
+        android:icon="@drawable/ic_baseline_create_24"
+        android:title="@string/title_catat" />
+
+    <item
+        android:id="@+id/navigation_hasil"
+        android:icon="@drawable/ic_baseline_content_paste_24"
+        android:title="@string/title_hasil" />
+
+    <item
+        android:id="@+id/navigation_profil"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="@string/title_profil" />
+
+</menu>
