@@ -30,10 +30,10 @@ class MonitoringFragment : Fragment() {
         _binding = FragmentMonitoringBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textMonitoring
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+//        val textView: TextView = binding.textMonitoring
+//        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
         return root
     }
 

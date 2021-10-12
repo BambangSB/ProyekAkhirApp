@@ -30,10 +30,10 @@ class CatatFragment : Fragment() {
         _binding = FragmentCatatBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textCatat
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+//        val textView: TextView = binding.textCatat
+//        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
         return root
     }
 
