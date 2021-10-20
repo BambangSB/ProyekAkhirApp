@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".SingupActivity">
@@ -12,44 +12,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
-        android:orientation="vertical"
-        android:layout_marginRight="24dp">
+        android:layout_marginRight="24dp"
+        android:orientation="vertical">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/daftaricon"/>
+            android:src="@drawable/daftaricon" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:textSize="35dp"
-            android:fontFamily="@font/openSansBold"
+            android:fontFamily="@font/opensansbold"
+            android:text="Daftar"
             android:textColor="@color/teal_700"
-            android:text="Daftar" />
+            android:textSize="45dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sealamat datang, Silahkan daftar dahulu"/>
+            android:text="Sealamat datang, Silahkan daftar dahulu" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_marginTop="24dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
             android:hint="Nama Lengkap"
             app:errorEnabled="true"
+            app:helperText="*Isi nama lengkap anda"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/teal_700"
             app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
             app:startIconTint="@color/teal_700">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dft_namalengkap"
-                android:inputType="text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,17 +60,19 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:hint="Email"
             app:errorEnabled="true"
+            app:errorTextColor="#FD2E2E"
+            app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+            app:helperTextTextColor="@color/teal_700"
             app:startIconDrawable="@drawable/ic_baseline_alternate_email_24"
             app:startIconTint="@color/teal_700">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dft_email"
-                android:inputType="textEmailAddress"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,9 +89,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dft_password"
-                android:inputType="textPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,9 +107,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dft_alamat"
-                android:inputType="textPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,32 +117,33 @@
             android:id="@+id/dft_daftar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_button_1"
             android:text="Daftar"
-            android:textColor="@color/white"
-            android:background="@drawable/custom_button_1"/>
+            android:textColor="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sudah memiliki akun?"/>
+                android:layout_marginTop="8dp"
+                android:text="Sudah memiliki akun?" />
 
 
             <TextView
-                android:layout_marginLeft="8dp"
                 android:id="@+id/dft_masuk"
-                android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/opensansbold"
+                android:linksClickable="true"
                 android:text="Masuk"
-                android:textColor="@color/teal_700"
-                android:fontFamily="@font/openSansBold"/>
+                android:textColor="@color/teal_700" />
         </LinearLayout>
     </LinearLayout>
 

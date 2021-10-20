@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.proyekakhirmonitoringporang.R
 import com.example.proyekakhirmonitoringporang.databinding.FragmentMonitoringBinding
 
 class MonitoringFragment : Fragment() {
@@ -24,17 +25,17 @@ class MonitoringFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(MonitoringViewModel::class.java)
-
-        _binding = FragmentMonitoringBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-//        val textView: TextView = binding.textMonitoring
-//        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
-        return root
+//        homeViewModel =
+//            ViewModelProvider(this).get(MonitoringViewModel::class.java)
+//
+//        _binding = FragmentMonitoringBinding.inflate(inflater, container, false)
+//        val root: View = binding.root
+//
+////        val textView: TextView = binding.textMonitoring
+////        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+////            textView.text = it
+////        })
+        return inflater.inflate(R.layout.fragment_monitoring, container, false)
     }
 
     override fun onDestroyView() {

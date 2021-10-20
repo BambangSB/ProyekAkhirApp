@@ -13,5 +13,9 @@ class LoginActivity : AppCompatActivity() {
         login_btn_masuk.setOnClickListener {
             startActivity(Intent(this, BottomNav::class.java))
         }
+
+        msk_daftar.setOnClickListener {
+            startActivity(Intent(this, SingupActivity::class.java))
+        }
     }
 }

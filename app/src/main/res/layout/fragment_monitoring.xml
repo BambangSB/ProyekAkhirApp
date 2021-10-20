@@ -1,290 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/teal_700"
     tools:context=".ui.monitoring.MonitoringFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="24dp"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/layoutNamaUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="160dp"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/namaUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hai, "
-                    android:textColor="#60F46F"
-                    android:textSize="24sp" />
+                    android:text="Selamat Datang" />
 
                 <TextView
-                    android:id="@+id/textUsername"
+                    android:id="@+id/nama_usermonitoring"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#60F46F"
-                    android:textSize="24sp" />
+                    android:text="User"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Selamat Datang"
-                android:textColor="#60F46F" />
+                android:layout_marginStart="210dp"
+                android:src="@drawable/ic_baseline_notifications_24" />
 
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/btnNotif"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="24dp"
-            android:src="@drawable/ic_baseline_notifications_24" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            app:cardCornerRadius="12dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="150dp"
+                app:cardCornerRadius="15dp">
 
                 <LinearLayout
-                    android:id="@+id/llKelembapan"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="10dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toTopOf="parent">
-
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="80dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center_vertical|center_horizontal"
-                            android:layout_marginBottom="8dp"
-                            android:src="@drawable/humidity"
-                            app:tint="#FE734C" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Kelembapan"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
 
-                            android:textColor="#FE734C"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:layout_marginBottom="8dp"
+                                android:src="@drawable/humidity"
+                                app:tint="#FE734C" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Kelembapan"
+                                android:textColor="#FE734C"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp">
+
+                            <TextView
+                                android:id="@+id/nilaiKelembapan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="000"
+                                android:textColor="#79E976"
+                                android:textSize="75sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="%"
+                                android:textColor="#79E976"
+                                android:textSize="75sp" />
+
+                        </LinearLayout>
+
+
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="12dp">
-
-                        <TextView
-                            android:id="@+id/nilaiKelembapan"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="000"
-                            android:textColor="#79E976"
-                            android:textSize="80sp" />
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="40dp"
-                            android:text="%"
-                            android:textColor="#79E976"
-                            android:textSize="80sp" />
+                            android:text="0-40% Kering"
+                            android:textColor="@color/oren"
+                            android:textSize="14sp" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:text="40% - 60% Normal"
+                            android:textColor="@color/ijo"
+                            android:textSize="14sp" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="60-100% Basah"
+                            android:textColor="@color/blue"
+                            android:textSize="14sp" />
                     </LinearLayout>
 
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:gravity="center"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/llKelembapan">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0-40% Kering"
-                        android:textColor="#FF2F2F"
-                        android:textSize="14sp" />
+            </com.google.android.material.card.MaterialCardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:text="40% - 60% Normal"
-                        android:textColor="@color/teal_700"
-                        android:textSize="14sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="60-100% Basah"
-                        android:textColor="@color/teal_200"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="21dp"
-            app:cardCornerRadius="12dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="150dp"
+                android:layout_marginTop="24dp"
+                app:cardCornerRadius="15dp">
 
                 <LinearLayout
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:id="@+id/llpH"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="10dp"
-                    android:orientation="horizontal">
-
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="80dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center_vertical|center_horizontal"
-                            android:layout_marginBottom="8dp"
-                            android:src="@drawable/ph"
-                            app:tint="#FE734C" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="pH Tanah"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
 
-                            android:textColor="#FE734C"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:layout_marginBottom="8dp"
+                                android:src="@drawable/ph"
+                                app:tint="#FE734C" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="pH Tanah"
+
+                                android:textColor="#FE734C"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp">
+
+                            <TextView
+                                android:id="@+id/nilaiPh"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="000"
+                                android:textColor="#79E976"
+                                android:textSize="75sp" />
+
+                        </LinearLayout>
+
+
+
+
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="160dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="12dp">
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/nilaiPh"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="--"
-                            android:textColor="#79E976"
-                            android:textSize="80sp" />
+                            android:text="0-7 : Asam, "
+                            android:textColor="@color/oren" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:text="7 : Normal, "
+                            android:textColor="@color/ijo" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="8-14 : Basa"
+                            android:textColor="@color/blue" />
                     </LinearLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/llpH"
-
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0-7 : Asam, "
-                        android:textColor="#FF2F2F" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:text="7 : Normal, "
-                        android:textColor="@color/teal_700" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="8-14 : Basa"
-                        android:textColor="@color/teal_200" />
 
                 </LinearLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
