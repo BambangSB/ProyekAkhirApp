@@ -9,4 +9,12 @@
     <string name="judulaplikasi">
         di aplikasi <b>Monitoring Porang</b>
         \n pilih tombol dibawah untuk melanjutkan</string>
+
+    <string-array name="array_kelompok">
+        <item>Kabat</item>
+        <item>Glagah</item>
+        <item>Songgon</item>
+        <item>Licin</item>
+    </string-array>
+
 </resources>
