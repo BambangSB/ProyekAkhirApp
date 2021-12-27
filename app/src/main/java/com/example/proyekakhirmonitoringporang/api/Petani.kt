@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Petani(
     @SerializedName("alamat")
-    val alamat: Any,
+    val alamat: String,
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("email")
@@ -13,11 +13,11 @@ data class Petani(
     @SerializedName("email_verified_at")
     val emailVerifiedAt: Any,
     @SerializedName("foto")
-    val foto: Any,
+    val foto: String,
     @SerializedName("id")
     val id: Int,
     @SerializedName("kelompok_id")
-    val kelompokId: Int,
+    val kelompokId: String,
     @SerializedName("nama")
     val nama: String,
     @SerializedName("password")
@@ -25,7 +25,7 @@ data class Petani(
     @SerializedName("status")
     val status: String,
     @SerializedName("telepon")
-    val telepon: Any,
+    val telepon: String,
     @SerializedName("updated_at")
     val updatedAt: String
 )

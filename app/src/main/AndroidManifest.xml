@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BottomNav"
+            android:name=".MainActivity"
             android:label="@string/title_activity_bottom_nav">
 
         </activity>
@@ -34,7 +34,7 @@
         <activity android:name=".NotifikasiActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SingupActivity" />
-        <activity android:name=".MainActivity"></activity>
+
 
     </application>
 

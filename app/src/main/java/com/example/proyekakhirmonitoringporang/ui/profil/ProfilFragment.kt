@@ -1,17 +1,25 @@
 package com.example.proyekakhirmonitoringporang.ui.profil
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.proyekakhirmonitoringporang.databinding.FragmentMonitoringBinding
+import com.example.proyekakhirmonitoringporang.R
+import com.example.proyekakhirmonitoringporang.WellcomeScreen
 import com.example.proyekakhirmonitoringporang.databinding.FragmentProfilBinding
+import com.example.proyekakhirmonitoringporang.helper.SharedPref
+import kotlinx.android.synthetic.main.fragment_profil.*
 
 class ProfilFragment : Fragment() {
+
+    private lateinit var s: SharedPref
+    lateinit var tvNama:TextView
+    lateinit var tvTelepon:TextView
+    lateinit var tvAlamat:TextView
 
     private lateinit var homeViewModel: ProfilViewModel
     private var _binding: FragmentProfilBinding? = null
@@ -19,6 +27,22 @@ class ProfilFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        init(view)
+//
+        s = SharedPref(requireActivity())
+
+
+
+        setData()
+        button()
+
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,10 +54,37 @@ class ProfilFragment : Fragment() {
 
         _binding = FragmentProfilBinding.inflate(inflater, container, false)
         val root: View = binding.root
+//        val view: View = inflater.inflate(R.layout.fragment_profil, container, false)
+
+
 
 
         return root
     }
+
+    private fun init(view: View) {
+        tvNama = view.findViewById(R.id.tv_pr_nama)
+        tvTelepon = view.findViewById(R.id.tv_pr_telepon)
+        tvAlamat = view.findViewById(R.id.tv_pr_alamat)
+    }
+
+    fun setData(){
+        tv_pr_nama.text = s.getString(s.nama)
+        tv_pr_telepon.text = s.getString(s.telepon)
+        tv_pr_alamat.text = s.getString(s.alamat)
+    }
+
+    fun button() {
+        btn_signOut.setOnClickListener {
+            s.setStatusLogin(false)
+            val intent = Intent(activity, WellcomeScreen::class.java)
+//            startActivity(Intent(requireActivity(), WellcomeScreen::class.java))
+            activity?.startActivity(intent)
+            activity?.finishAffinity()
+        }
+
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -2,9 +2,11 @@ package com.example.proyekakhirmonitoringporang
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyekakhirmonitoringporang.api.daftar.RegisterResponse
+import com.example.proyekakhirmonitoringporang.app.ResponModel
 import com.example.proyekakhirmonitoringporang.app.RetrofitClient
 import kotlinx.android.synthetic.main.activity_singup.*
 import retrofit2.Call
@@ -27,11 +29,6 @@ class SingupActivity : AppCompatActivity() {
         setContentView(R.layout.activity_singup)
 
         dft_daftar.setOnClickListener {
-//            Toast.makeText(
-//                applicationContext,
-//                "Selamat Berhasil Mendaftar",
-//                Toast.LENGTH_LONG
-//            ).show()
             getData()
         }
 
@@ -47,6 +44,25 @@ class SingupActivity : AppCompatActivity() {
     }
 
     private fun getData() {
+        if (dft_namalengkap.text!!.isEmpty()) {
+            dft_namalengkap.error = "Nama tidak boleh kosong"
+            dft_namalengkap.requestFocus() //crusor langsung kesini jika error
+            return //jika nama kosong, tidak eksekusi code selanjutnya
+        } else if (dft_email.text!!.isEmpty()) {
+            dft_email.error = "Email tidak boleh kosong"
+            dft_email.requestFocus()
+            return
+        } else if (dft_password.text!!.isEmpty()) {
+            dft_password.error = "Password tidak boleh kosong"
+            dft_password.requestFocus()
+            return
+        } else if (dft_kelompok.text!!.isEmpty()) {
+            dft_kelompok.error = "Pilih kelompok yang ada"
+            dft_kelompok.requestFocus()
+            return
+        }
+
+        pb_signUp.visibility = View.VISIBLE
         RetrofitClient.getInstance.register(
             dft_namalengkap.text.toString(),
             dft_email.text.toString(),
@@ -57,37 +73,28 @@ class SingupActivity : AppCompatActivity() {
             dft_foto.text.toString()
 
         ).enqueue(object : Callback<RegisterResponse> {
+
             override fun onResponse(
                 call: Call<RegisterResponse>,
                 response: Response<RegisterResponse>
             ) {
-                if (response.isSuccessful) {
-                    response.body()
-                    Toast.makeText(
-                        this@SingupActivity,
-                        response.message(),
-//                        "Berhasil mendaftar, Tunggu admin untuk menerima"
-                        Toast.LENGTH_SHORT
-                    )
+                pb_signUp.visibility = View.GONE
+                val respon = response.body()!!
+                if (respon.success == 1){
+                    Toast.makeText(this@SingupActivity, respon.message, Toast.LENGTH_SHORT)
                         .show()
-                } else {
-                    Toast.makeText(
-                        this@SingupActivity,
-                        response.message(),
-                        Toast.LENGTH_SHORT
-                    )
+                } else{
+                    Toast.makeText(this@SingupActivity, respon.message, Toast.LENGTH_SHORT)
                         .show()
                 }
+
             }
 
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-
+                pb_signUp.visibility = View.GONE
                 Toast.makeText(
-                    this@SingupActivity,
-                    t.message,
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                    this@SingupActivity, "Error: " + t.message, Toast.LENGTH_SHORT
+                ).show()
             }
 
         })
