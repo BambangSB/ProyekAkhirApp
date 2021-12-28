@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyekakhirmonitoringporang.api.daftar.RegisterResponse
-import com.example.proyekakhirmonitoringporang.app.ResponModel
 import com.example.proyekakhirmonitoringporang.app.RetrofitClient
 import kotlinx.android.synthetic.main.activity_singup.*
 import retrofit2.Call

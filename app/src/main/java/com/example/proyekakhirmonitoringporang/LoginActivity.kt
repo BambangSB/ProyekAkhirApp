@@ -7,9 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyekakhirmonitoringporang.api.LoginResponse
-import com.example.proyekakhirmonitoringporang.app.ResponModel
 import com.example.proyekakhirmonitoringporang.app.RetrofitClient
-import com.example.proyekakhirmonitoringporang.app.UserModel
 import com.example.proyekakhirmonitoringporang.helper.SharedPref
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_singup.*
@@ -101,6 +99,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                pb_signIn.visibility = View.GONE
                 Toast.makeText(this@LoginActivity, t.message, Toast.LENGTH_SHORT).show()
             }
 

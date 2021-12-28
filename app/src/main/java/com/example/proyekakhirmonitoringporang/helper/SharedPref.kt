@@ -3,7 +3,6 @@ package com.example.proyekakhirmonitoringporang.helper
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.proyekakhirmonitoringporang.app.UserModel
 import com.google.gson.Gson
 
 class SharedPref(activity: Activity) {
