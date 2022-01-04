@@ -131,9 +131,11 @@
                         android:gravity="center_vertical">
 
                         <LinearLayout
+                            android:id="@+id/btn_lahan_profil"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
+                            android:clickable="true"
                             android:orientation="horizontal">
 
                             <ImageView

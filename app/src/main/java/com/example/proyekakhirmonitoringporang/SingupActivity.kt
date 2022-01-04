@@ -1,48 +1,130 @@
 package com.example.proyekakhirmonitoringporang
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyekakhirmonitoringporang.api.daftar.RegisterResponse
 import com.example.proyekakhirmonitoringporang.app.RetrofitClient
+import com.github.dhaval2404.imagepicker.ImagePicker
+import com.inyongtisto.myhelper.extension.toMultipartBody
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_singup.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class SingupActivity : AppCompatActivity() {
 
-//    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-//        val kelompok = resources.getStringArray(R.array.array_kelompok)
-//        val arrayAdapter = ArrayAdapter(R.id.kelompok_item,kelompok)
-//    }
-//
-//    private fun ArrayAdapter(kelompokItem: Int, kelompok: Array<String>): Any {
-//
-//    }
+    private var mProfileUri: File? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_singup)
 
-        dft_daftar.setOnClickListener {
-            getData()
-        }
-
-
-
-        dft_masuk.setOnClickListener {
-            moveLogin()
-        }
+        button()
 
 //        dft_email.doOnTextChanged { text, start, before, count ->
 //            if (text!!.)
 //        }
     }
 
-    private fun getData() {
+    private fun button() {
+
+        dft_daftar.setOnClickListener {
+            pb_signUp.visibility = View.VISIBLE
+            if (mProfileUri == null) {
+                pb_signUp.visibility = View.GONE
+                Toast.makeText(this, "Masukkan Foto Terlebih Dahulu", Toast.LENGTH_SHORT).show()
+            } else {
+                uploadFoto(mProfileUri!!)
+//                Log.d("tag :", waktu.hour.toString())
+            }
+        }
+
+
+        dft_btn_uploadFoto.setOnClickListener {
+            imagePicker()
+
+        }
+
+
+        dft_masuk.setOnClickListener {
+            moveLogin()
+        }
+    }
+
+    private fun imagePicker() {
+        ImagePicker.with(this)
+//        ImagePicker.with(this)
+            .crop()
+            .compress(1024) //Final image size will be less than 1 MB(Optional)
+            .maxResultSize(
+                512,
+                512
+            )  //Final image resolution will be less than 1080 x 1080(Optional)
+            .createIntent { intent ->
+                startForProfileImageResult.launch(intent)
+            }
+    }
+
+    private val startForProfileImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            if (resultCode == Activity.RESULT_OK) {
+                //Image Uri will not be null for RESULT_OK
+                val fileUri = data?.data!!
+
+                mProfileUri = File(fileUri.path!!)
+                dft_imgFoto.setImageURI(fileUri)
+            } else if (resultCode == ImagePicker.RESULT_ERROR) {
+                Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+    var alertDialog: AlertDialog? = null
+
+
+    private fun dialogUpload2(file: File) {
+        val view = layoutInflater
+        val layout = view.inflate(R.layout.activity_singup, null)
+
+        val revImg: ImageView = layout.findViewById(R.id.dft_imgFoto)
+        val btnAmbilFoto: Button = layout.findViewById(R.id.dft_btn_uploadFoto)
+        val btnUploadFoto: Button = layout.findViewById(R.id.dft_daftar)
+
+        Picasso.get()
+            .load(file)
+            .into(revImg)
+
+        btnAmbilFoto.setOnClickListener {
+            imagePicker()
+        }
+
+        btnUploadFoto.setOnClickListener {
+//            getData()
+            uploadFoto(file)
+        }
+    }
+
+    private fun uploadFoto(file: File) {
+
         if (dft_namalengkap.text!!.isEmpty()) {
             dft_namalengkap.error = "Nama tidak boleh kosong"
             dft_namalengkap.requestFocus() //crusor langsung kesini jika error
@@ -62,42 +144,53 @@ class SingupActivity : AppCompatActivity() {
         }
 
         pb_signUp.visibility = View.VISIBLE
-        RetrofitClient.getInstance.register(
-            dft_namalengkap.text.toString(),
-            dft_email.text.toString(),
-            dft_password.text.toString(),
-            dft_telepon.text.toString(),
-            dft_alamat.text.toString(),
-            dft_kelompok.text.toString(),
-            dft_foto.text.toString()
 
-        ).enqueue(object : Callback<RegisterResponse> {
+        val fileImage = file.toMultipartBody("foto")
+        RetrofitClient.getInstance.registerFoto(
+            RequestBody.create("text/plain".toMediaTypeOrNull(), dft_namalengkap.text.toString()),
+            RequestBody.create("text/plain".toMediaTypeOrNull(), dft_email.text.toString()),
+            RequestBody.create("text/plain".toMediaTypeOrNull(), dft_password.text.toString()),
+            RequestBody.create("text/plain".toMediaTypeOrNull(), dft_telepon.text.toString()),
+            RequestBody.create("text/plain".toMediaTypeOrNull(), dft_alamat.text.toString()),
+            RequestBody.create("text/plain".toMediaTypeOrNull(), dft_kelompok.text.toString()),
 
-            override fun onResponse(
-                call: Call<RegisterResponse>,
-                response: Response<RegisterResponse>
-            ) {
-                pb_signUp.visibility = View.GONE
-                val respon = response.body()!!
-                if (respon.success == 1){
-                    Toast.makeText(this@SingupActivity, respon.message, Toast.LENGTH_SHORT)
-                        .show()
-                } else{
-                    Toast.makeText(this@SingupActivity, respon.message, Toast.LENGTH_SHORT)
-                        .show()
+            fileImage!!
+        )
+            .enqueue(object : Callback<RegisterResponse> {
+
+                override fun onResponse(
+                    call: Call<RegisterResponse>,
+                    response: Response<RegisterResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val respon = response.body()!!
+                        if (respon.success == 1) {
+                            pb_signUp.visibility = View.GONE
+                            Toast.makeText(this@SingupActivity, respon.message, Toast.LENGTH_SHORT)
+                                .show()
+                        } else if (respon.success == 0) {
+                            pb_signUp.visibility = View.GONE
+                            Toast.makeText(this@SingupActivity, respon.message, Toast.LENGTH_SHORT)
+                                .show()
+                        } else {
+                            pb_signUp.visibility = View.GONE
+                            Toast.makeText(this@SingupActivity, respon.message, Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
                 }
 
-            }
+                override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                    pb_signUp.visibility = View.GONE
+                    Toast.makeText(
+                        this@SingupActivity, "Error: " + t.message, Toast.LENGTH_SHORT
+                    ).show()
+                }
 
-            override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                pb_signUp.visibility = View.GONE
-                Toast.makeText(
-                    this@SingupActivity, "Error: " + t.message, Toast.LENGTH_SHORT
-                ).show()
-            }
+            })
 
-        })
     }
+
 
     private fun moveWellcome() {
         startActivity(Intent(this, WellcomeScreen::class.java))

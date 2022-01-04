@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.proyekakhirmonitoringporang.LahanActivity
 import com.example.proyekakhirmonitoringporang.R
 import com.example.proyekakhirmonitoringporang.WellcomeScreen
 import com.example.proyekakhirmonitoringporang.databinding.FragmentProfilBinding
@@ -69,9 +70,15 @@ class ProfilFragment : Fragment() {
     }
 
     fun setData(){
-        tv_pr_nama.text = s.getString(s.nama)
-        tv_pr_telepon.text = s.getString(s.telepon)
-        tv_pr_alamat.text = s.getString(s.alamat)
+        if (s.getUser() == null){
+            return
+        }
+
+        val user = s.getUser()!!
+
+        tv_pr_nama.text = user.nama
+        tv_pr_telepon.text = user.telepon
+        tv_pr_alamat.text = user.alamat
     }
 
     fun button() {
@@ -81,6 +88,11 @@ class ProfilFragment : Fragment() {
 //            startActivity(Intent(requireActivity(), WellcomeScreen::class.java))
             activity?.startActivity(intent)
             activity?.finishAffinity()
+        }
+
+        btn_lahan_profil.setOnClickListener {
+            val intent = Intent(activity, LahanActivity::class.java)
+            activity?.startActivity(intent)
         }
 
     }

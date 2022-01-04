@@ -19,4 +19,11 @@
     <color name="oren">#b23b3b</color>
     <color name="blue">#1565c0</color>
     <color name="ijo">#66bb6a</color>
+
+<!--    gradient color -->
+    <color name="blue_start">#2193b0</color>
+    <color name="blue_end">#6dd5ed</color>
+
+    <color name="green_start">#11998e</color>
+    <color name="green_end">#38ef7d</color>
 </resources>

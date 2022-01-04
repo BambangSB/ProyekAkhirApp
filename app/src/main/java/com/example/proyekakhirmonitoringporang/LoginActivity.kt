@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
             return //jika nama kosong, tidak eksekusi code selanjutnya
         }
 
-        pb_signIn.visibility = View.VISIBLE
+
         RetrofitClient.getInstance.login(
             edit_email.text.toString(),
             edit_password.text.toString()
@@ -83,10 +83,12 @@ class LoginActivity : AppCompatActivity() {
                 pb_signIn.visibility = View.GONE
                 val respon = response.body()!!
                 if (respon.success == 1){
+                    pb_signIn.visibility = View.VISIBLE
                     s.setStatusLogin(true)
-                    s.setString(s.nama, respon.petani.nama)
-                    s.setString(s.telepon, respon.petani.telepon)
-                    s.setString(s.alamat, respon.petani.alamat)
+                    s.setUser(respon.petani)
+//                    s.setString(s.nama, respon.petani.nama)
+//                    s.setString(s.telepon, respon.petani.telepon)
+//                    s.setString(s.alamat, respon.petani.alamat)
 
                     moveIntent()
                     finishAffinity()

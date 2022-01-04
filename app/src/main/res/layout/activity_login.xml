@@ -10,9 +10,10 @@
     <ProgressBar
         android:visibility="gone"
         android:id="@+id/pb_signIn"
-        android:layout_centerInParent="true"
-        android:layout_width="80dp"
-        android:layout_height="80dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
 
     <ScrollView
         android:layout_width="match_parent"

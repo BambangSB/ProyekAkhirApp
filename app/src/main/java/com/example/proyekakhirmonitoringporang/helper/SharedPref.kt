@@ -3,6 +3,7 @@ package com.example.proyekakhirmonitoringporang.helper
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.proyekakhirmonitoringporang.api.Petani
 import com.google.gson.Gson
 
 class SharedPref(activity: Activity) {
@@ -13,6 +14,8 @@ class SharedPref(activity: Activity) {
     val email = "email"
     val alamat = "alamat"
     val telepon = "telepon"
+
+    val user = "user"
 
 
     val mypref = "MAIN_PREF"
@@ -33,10 +36,15 @@ class SharedPref(activity: Activity) {
         return sp.getBoolean(login,false)
     }
 
-//    fun getUser(): UserModel? {
-//        val data:String = sp.getString(user, null) ?: return null
-//        return Gson().fromJson<UserModel>(data, UserModel::class.java)
-//    }
+    fun setUser(value: Petani) {
+        val data: String = Gson().toJson(value, Petani::class.java)
+        sp.edit().putString(user, data).apply()
+    }
+
+    fun getUser(): Petani? {
+        val data:String = sp.getString(user, null) ?: return null
+        return Gson().fromJson<Petani>(data, Petani::class.java)
+    }
 
     fun setString(key: String, vlaue: String) {
         sp.edit().putString(key, vlaue).apply()

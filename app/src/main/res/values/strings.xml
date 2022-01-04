@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">1 TA APP</string>
+    <string name="app_name">Aplikasi Monitoring Porang</string>
     <string name="title_activity_bottom_nav">MainActivity</string>
     <string name="title_monitoring">Monitoring</string>
     <string name="title_catat">Catat</string>
@@ -16,5 +16,8 @@
         <item>Songgon</item>
         <item>Licin</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="desc_tambah_lahan">Silahkan isi form berikut untuk menambahkan lahan</string>
 
 </resources>
