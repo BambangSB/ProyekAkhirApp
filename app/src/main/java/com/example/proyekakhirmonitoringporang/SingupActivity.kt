@@ -5,9 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -18,15 +16,18 @@ import com.inyongtisto.myhelper.extension.toMultipartBody
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_singup.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
+
 class SingupActivity : AppCompatActivity() {
 
     private var mProfileUri: File? = null
+    lateinit var autoCompleteTextView: AutoCompleteTextView
+    lateinit var adapterItems: ArrayAdapter<String>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,9 +36,24 @@ class SingupActivity : AppCompatActivity() {
 
         button()
 
+        itemKelompok()
+
 //        dft_email.doOnTextChanged { text, start, before, count ->
 //            if (text!!.)
 //        }
+    }
+
+    private fun itemKelompok() {
+        val type = arrayOf("1", "2", "3")
+
+        val adapter = ArrayAdapter(
+            this,
+            R.layout.item_kelompok_dropdown,
+            type
+        )
+
+        val editTextFilledExposedDropdown = findViewById<AutoCompleteTextView>(R.id.dft_kelompok)
+        editTextFilledExposedDropdown.setAdapter(adapter)
     }
 
     private fun button() {
@@ -147,12 +163,12 @@ class SingupActivity : AppCompatActivity() {
 
         val fileImage = file.toMultipartBody("foto")
         RetrofitClient.getInstance.registerFoto(
-            RequestBody.create("text/plain".toMediaTypeOrNull(), dft_namalengkap.text.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), dft_email.text.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), dft_password.text.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), dft_telepon.text.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), dft_alamat.text.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), dft_kelompok.text.toString()),
+            dft_namalengkap.text.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
+            dft_email.text.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
+            dft_password.text.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
+            dft_telepon.text.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
+            dft_alamat.text.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
+            dft_kelompok.text.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
 
             fileImage!!
         )
@@ -201,6 +217,7 @@ class SingupActivity : AppCompatActivity() {
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
+
 
 
 }

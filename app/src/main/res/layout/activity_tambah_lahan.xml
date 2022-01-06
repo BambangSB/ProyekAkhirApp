@@ -1,148 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".lahan.TambahLahan">
 
-    <LinearLayout
+    <ProgressBar
+        android:id="@+id/pb_tambahLahan"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="20dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:text="@string/desc_tambah_lahan"
-            android:textColor="@color/primary_dark" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:hint="Id Petani"
-            app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
-            app:startIconTint="@color/teal_700">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/il_idPetani"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="18dp"
-            android:hint="Id Kelompok"
-            app:startIconDrawable="@drawable/ic_baseline_people_24"
-            app:startIconTint="@color/teal_700">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/il_idKelompok"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="18dp"
-            android:hint="Nama Lahan"
-            app:startIconDrawable="@drawable/ic_baseline_lahan_24"
-            app:startIconTint="@color/teal_700">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/il_namaLahan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="18dp"
-            android:hint="Alamat Lahan"
-            app:startIconDrawable="@drawable/ic_baseline_map_24"
-            app:startIconTint="@color/teal_700">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/il_alamatLahan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="18dp"
-            android:hint="Luas Lahan"
-            app:startIconDrawable="@drawable/ic_baseline_luas"
-            app:startIconTint="@color/teal_700">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/il_luasLahan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+        android:layout_marginBottom="20dp">
 
         <LinearLayout
-            android:id="@+id/il_btn_uploadFoto"
-            android:orientation="horizontal"
-            android:layout_marginVertical="18dp"
             android:layout_width="match_parent"
-            android:background="@drawable/custom_button_1"
-            android:gravity="center_vertical"
-            android:layout_height="40dp">
-
-            <ImageView
-                android:layout_marginHorizontal="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_image_search_24"
-                app:tint="@color/white" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Upload Foto Lahan"
+                android:layout_marginBottom="20dp"
+                android:text="@string/desc_tambah_lahan"
+                android:textColor="@color/primary_dark" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="Id Petani"
+                app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
+                app:startIconTint="@color/teal_700">
+
+                <AutoCompleteTextView
+                    android:id="@+id/il_idPetani"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"/>
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:hint="Id Kelompok"
+                app:startIconDrawable="@drawable/ic_baseline_people_24"
+                app:startIconTint="@color/teal_700">
+
+                <AutoCompleteTextView
+                    android:id="@+id/il_idKelompok"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:hint="Nama Lahan"
+                app:startIconDrawable="@drawable/ic_baseline_lahan_24"
+                app:startIconTint="@color/teal_700">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/il_namaLahan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:hint="Alamat Lahan"
+                app:startIconDrawable="@drawable/ic_baseline_map_24"
+                app:startIconTint="@color/teal_700">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/il_alamatLahan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:hint="Luas Lahan"
+                app:startIconDrawable="@drawable/ic_baseline_luas"
+                app:startIconTint="@color/teal_700">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/il_luasLahan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="18dp">
+
+                <ImageView
+                    android:id="@+id/img_tabmahLahan"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/ic_baseline_image_search_24" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_tambahFotoLahan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_button_2"
+                android:text="Tambah Foto"
+                android:textColor="@color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/il_btn_tambahLahan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="18dp"
+                android:background="@drawable/custom_button_1"
+                android:text="Simpan Lahan"
                 android:textColor="@color/white" />
 
         </LinearLayout>
 
+    </ScrollView>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginTop="18dp"
-            android:id="@+id/il_btn_tambahLahan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_button_1"
-            android:text="Tambah Lahan"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
-
-</ScrollView>
+</RelativeLayout>

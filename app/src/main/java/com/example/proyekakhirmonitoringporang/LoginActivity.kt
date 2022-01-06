@@ -54,30 +54,6 @@ class LoginActivity : AppCompatActivity() {
             edit_email.text.toString(),
             edit_password.text.toString()
         ).enqueue(object : Callback<LoginResponse> {
-//            override fun onResponse(call: Call<ResponModel>, response: Response<ResponModel>) {
-//                pb_signIn.visibility = View.GONE
-//                val respon = response.body()!!
-//                if (respon.success == 1){
-////                    s = SharedPref(this@LoginActivity)
-//                    s.setStatusLogin(true)
-//                    s.setString(s.nama, respon.user.nama)
-//                    s.setString(s.telepon, respon.user.telepon)
-//                    s.setString(s.alamat, respon.user.alamat)
-//
-//                    moveIntent()
-//                    finishAffinity()
-//                    Toast.makeText(this@LoginActivity, respon.message, Toast.LENGTH_SHORT).show()
-//                } else{
-//                    pb_signIn.visibility = View.GONE
-//                    Toast.makeText(this@LoginActivity, respon.message, Toast.LENGTH_SHORT)
-//                        .show()
-//                }
-//
-//            }
-//
-//            override fun onFailure(call: Call<ResponModel>, t: Throwable) {
-//                Toast.makeText(this@LoginActivity, t.message, Toast.LENGTH_SHORT).show()
-//            }
 
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 pb_signIn.visibility = View.GONE

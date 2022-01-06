@@ -45,15 +45,15 @@ interface ApiClient {
 
         ):Call<RegisterResponse>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("InputLahan")
     fun inputLahan(
-        @Field("petani_id") petani_id: String,
-        @Field("kelompok_id") kelompok_id: String,
-        @Field("nama") nama: String,
-        @Field("alamat") alamat: String,
-        @Field("luas_lahan") luas_lahan: String,
-        @Field("foto") foto: String,
+        @Part("petani_id") petani_id: RequestBody,
+        @Part("kelompok_id") kelompok_id: RequestBody,
+        @Part("nama") nama: RequestBody,
+        @Part("alamat") alamat: RequestBody,
+        @Part("luas_lahan") luas_lahan: RequestBody,
+        @Part foto: MultipartBody.Part,
     ):Call<InputLahan>
 
 }

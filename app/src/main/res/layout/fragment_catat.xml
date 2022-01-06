@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,128 +8,121 @@
     android:orientation="vertical"
     tools:context=".ui.catat.CatatFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nama Lahan"/>
-
-
-    </LinearLayout>
 
     <ScrollView
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="25dp"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:orientation="vertical">
+                android:layout_marginHorizontal="1dp"
+                android:layout_marginBottom="2dp"
+                android:elevation="3dp">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nama Lahan"
-                    app:endIconMode="clear_text"
-                    app:errorEnabled="true"
-                    app:startIconDrawable="@drawable/ic_baseline_filter_hdr_24"
-                    app:startIconTint="@color/teal_700">
+                    android:orientation="vertical">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/input_nama_lahan"
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text" />
+                        android:hint="Nama Lahan"
+                        app:endIconMode="clear_text"
+                        app:startIconDrawable="@drawable/ic_baseline_filter_hdr_24"
+                        app:startIconTint="@color/teal_700">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/input_nama_lahan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:hint="Jumlah panen umbi (Kg)"
-                    app:endIconCheckable="true"
-                    app:endIconMode="clear_text"
-                    app:errorEnabled="true"
-                    app:startIconDrawable="@drawable/ic_baseline_fitness_center_24"
-                    app:startIconTint="@color/teal_700">
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edit_inptUmbi"
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number" />
+                        android:layout_gravity="center_horizontal"
+                        android:hint="Jumlah panen umbi (Kg)"
+                        app:endIconCheckable="true"
+                        app:endIconMode="clear_text"
+                        app:errorEnabled="true"
+                        app:startIconDrawable="@drawable/ic_baseline_fitness_center_24"
+                        app:startIconTint="@color/teal_700">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_inptUmbi"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Jumlah panen katak (Kg)"
-                    app:endIconMode="clear_text"
-                    app:errorEnabled="true"
-                    app:startIconDrawable="@drawable/ic_baseline_fitness_center_24"
-                    app:startIconTint="@color/teal_700">
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edit_inptKatak"
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number" />
+                        android:hint="Jumlah panen katak (Kg)"
+                        app:endIconMode="clear_text"
+                        app:errorEnabled="true"
+                        app:startIconDrawable="@drawable/ic_baseline_fitness_center_24"
+                        app:startIconTint="@color/teal_700">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_inptKatak"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Tanggal Panen"
-                    app:endIconMode="clear_text"
-                    app:errorEnabled="true"
-                    app:startIconDrawable="@drawable/ic_baseline_today_24"
-                    app:startIconTint="@color/teal_700">
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edit_tanggalPanen"
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="date" />
+                        android:hint="Tanggal Panen"
+                        app:endIconMode="clear_text"
+                        app:errorEnabled="true"
+                        app:startIconDrawable="@drawable/ic_baseline_today_24"
+                        app:startIconTint="@color/teal_700">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_tanggalPanen"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="date" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/login_btn_masuk"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/custom_button_1"
-                    android:text="Simpan"
-                    android:textColor="@color/white" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/login_btn_masuk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/custom_button_1"
+                        android:text="Simpan"
+                        android:textColor="@color/white" />
 
-            </LinearLayout>
+                </LinearLayout>
 
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 
     </ScrollView>
 
 
-
-
-</LinearLayout>
+</RelativeLayout>

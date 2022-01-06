@@ -53,7 +53,6 @@
                 android:layout_marginTop="24dp"
                 android:hint="Nama Lengkap"
                 app:errorEnabled="true"
-                app:helperText="*Isi nama lengkap anda"
                 app:helperTextEnabled="true"
                 app:helperTextTextColor="@color/teal_700"
                 app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
@@ -143,30 +142,55 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:hint="ID Kelompok"
-                app:errorEnabled="true"
-                app:startIconDrawable="@drawable/ic_baseline_store_mall_directory_24"
-                app:startIconTint="@color/teal_700">
+                android:hint="Id Kelompok"
+                app:startIconDrawable="@drawable/ic_baseline_people_24"
+                app:startIconTint="@color/primary">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:id="@+id/dft_kelompok"
+                    android:inputType="none"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    android:layout_height="match_parent" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <ImageView
-                android:id="@+id/dft_imgFoto"
+            <LinearLayout
+                android:layout_marginVertical="10dp"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginBottom="18dp"
-                android:src="@drawable/ic_baseline_image_search_24" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Keterangan Id:"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 : Sukojati, 2 : Glagah, 3 : Songgon"/>
+
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/dft_imgFoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="18dp"
+                    android:src="@drawable/ic_baseline_image_search_24" />
+
+            </androidx.cardview.widget.CardView>
+
+
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/dft_btn_uploadFoto"
