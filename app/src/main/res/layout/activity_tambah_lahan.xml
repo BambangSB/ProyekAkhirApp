@@ -33,41 +33,71 @@
                 android:text="@string/desc_tambah_lahan"
                 android:textColor="@color/primary_dark" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:hint="Id Petani"
-                app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
-                app:startIconTint="@color/teal_700">
+                android:layout_marginHorizontal="11dp">
 
-                <AutoCompleteTextView
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_baseline_account_circle_24"
+                    app:tint="@color/primary" />
+
+                <TextView
+                    android:textSize="16sp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Id Pemilik Lahan :"/>
+
+                <TextView
                     android:id="@+id/il_idPetani"
-                    android:layout_width="match_parent"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="none"/>
+                    android:text="00"/>
 
+            </LinearLayout>
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <LinearLayout
+                android:layout_marginTop="24dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="18dp"
-                android:hint="Id Kelompok"
-                app:startIconDrawable="@drawable/ic_baseline_people_24"
-                app:startIconTint="@color/teal_700">
+                android:layout_marginHorizontal="11dp">
 
-                <AutoCompleteTextView
-                    android:id="@+id/il_idKelompok"
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_baseline_account_circle_24"
+                    app:tint="@color/primary" />
+
+                <TextView
+                    android:textSize="16sp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="none"/>
+                    android:text="Id Kelompok Tani :"/>
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:id="@+id/il_idKelompok"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00"/>
+
+            </LinearLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

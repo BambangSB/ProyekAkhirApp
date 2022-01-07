@@ -1,7 +1,6 @@
 package com.example.proyekakhirmonitoringporang
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -17,7 +16,7 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
-    lateinit var s:SharedPref
+    lateinit var s: SharedPref
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,17 +37,17 @@ class LoginActivity : AppCompatActivity() {
 
     private fun getDataLogin() {
 
-        if (edit_email.text!!.isEmpty()){
+        if (edit_email.text!!.isEmpty()) {
             edit_email.error = "Email tidak boleh kosong"
             edit_email.requestFocus()
             return
-        }
-        else if (edit_password.text!!.isEmpty()) {
+        } else if (edit_password.text!!.isEmpty()) {
             edit_password.error = "Nama tidak boleh kosong"
             edit_password.requestFocus() //crusor langsung kesini jika error
             return //jika nama kosong, tidak eksekusi code selanjutnya
         }
 
+        pb_signIn.visibility = View.VISIBLE
 
         RetrofitClient.getInstance.login(
             edit_email.text.toString(),
@@ -58,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 pb_signIn.visibility = View.GONE
                 val respon = response.body()!!
-                if (respon.success == 1){
+                if (respon.success == 1) {
                     pb_signIn.visibility = View.VISIBLE
                     s.setStatusLogin(true)
                     s.setUser(respon.petani)

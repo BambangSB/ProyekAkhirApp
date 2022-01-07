@@ -84,6 +84,7 @@ class ProfilFragment : Fragment() {
     fun button() {
         btn_signOut.setOnClickListener {
             s.setStatusLogin(false)
+            s.clear()
             val intent = Intent(activity, WellcomeScreen::class.java)
 //            startActivity(Intent(requireActivity(), WellcomeScreen::class.java))
             activity?.startActivity(intent)

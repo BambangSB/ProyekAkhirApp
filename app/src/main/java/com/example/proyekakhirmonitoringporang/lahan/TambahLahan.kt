@@ -54,9 +54,8 @@ class TambahLahan : AppCompatActivity() {
         idKelompok = findViewById<EditText>(R.id.il_idKelompok)
     }
 
-    fun setData(){
-
-        if (s.getUser() == null){
+    fun setData() {
+        if (s.getUser() == null) {
             return
         }
 
@@ -83,7 +82,7 @@ class TambahLahan : AppCompatActivity() {
                 pb_tambahLahan.visibility = View.GONE
                 uploadFoto(mProfileUri!!)
                 startActivity(Intent(this, LahanActivity::class.java))
-                finish()
+                finishAffinity()
 //                Log.d("tag :", waktu.hour.toString())
             }
 

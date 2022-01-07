@@ -3,6 +3,7 @@ package com.example.proyekakhirmonitoringporang.app
 import android.media.Image
 import com.example.proyekakhirmonitoringporang.api.LoginResponse
 import com.example.proyekakhirmonitoringporang.api.daftar.RegisterResponse
+import com.example.proyekakhirmonitoringporang.api.getLahan.GetLahan
 import com.example.proyekakhirmonitoringporang.api.inputLahan.InputLahan
 import com.example.proyekakhirmonitoringporang.api.inputLahan.Tanam
 import okhttp3.MultipartBody
@@ -55,5 +56,11 @@ interface ApiClient {
         @Part("luas_lahan") luas_lahan: RequestBody,
         @Part foto: MultipartBody.Part,
     ):Call<InputLahan>
+
+    @GET("GetLahan/{id}")
+    fun getLahan(
+        @Path("id") id: Int
+    ):Call<GetLahan>
+
 
 }
