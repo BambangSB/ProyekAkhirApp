@@ -168,11 +168,11 @@
                         app:startIconDrawable="@drawable/ic_baseline_today_24"
                         app:startIconTint="@color/teal_700">
 
-                        <com.google.android.material.textfield.TextInputEditText
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
                             android:id="@+id/edit_tanggalPanen"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="date" />
+                            android:inputType="none" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
