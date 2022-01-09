@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class CatatViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Ini Halaman Catat"
+        value = ""
     }
     val text: LiveData<String> = _text
 }

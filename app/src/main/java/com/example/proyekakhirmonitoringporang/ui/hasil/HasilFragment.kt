@@ -1,45 +1,99 @@
 package com.example.proyekakhirmonitoringporang.ui.hasil
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.example.proyekakhirmonitoringporang.databinding.FragmentCatatBinding
-import com.example.proyekakhirmonitoringporang.databinding.FragmentHasilBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.proyekakhirmonitoringporang.R
+import com.example.proyekakhirmonitoringporang.adapter.AdapterHasil
+import com.example.proyekakhirmonitoringporang.adapter.AdapterLahan
+import com.example.proyekakhirmonitoringporang.api.getLahan.GetLahan
+import com.example.proyekakhirmonitoringporang.api.getLahan.Massage
+import com.example.proyekakhirmonitoringporang.app.RetrofitClient
+import com.example.proyekakhirmonitoringporang.helper.SharedPref
+import kotlinx.android.synthetic.main.activity_lahan.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HasilFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: HasilViewModel
-    private var _binding: FragmentHasilBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    lateinit var adapterHasil: AdapterHasil
+    lateinit var swipeHasil: SwipeRefreshLayout
+    lateinit var rvHasil: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-            ViewModelProvider(this).get(HasilViewModel::class.java)
+        val view: View = inflater.inflate(R.layout.fragment_hasil, container, false)
 
-        _binding = FragmentHasilBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val textView: TextView = binding.textHasil
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+        swipeHasil = view.findViewById(R.id.swipe_hasil)
+
+        rvHasil = view.findViewById(R.id.rv_hasil_catat)
+
+        refresh()!!
+
+        return view
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun refresh() {
+        swipeContainer.setOnRefreshListener {
+            // Your code to refresh the list here.
+            // Make sure you call swipeContainer.setRefreshing(false)
+            // once the network request has completed successfully.
+            getLahan(0)
+        }
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+            android.R.color.holo_green_light,
+            android.R.color.holo_orange_light,
+            android.R.color.holo_red_light);
+    }
+
+    fun displayLahan() {
+
+        val layoutManager = LinearLayoutManager(requireContext())
+        layoutManager.orientation = LinearLayoutManager.VERTICAL
+
+        rvHasil.adapter = AdapterHasil(listLahan)
+        rvHasil.layoutManager = layoutManager
+
+    }
+
+    private var listLahan: ArrayList<Massage> = ArrayList()
+
+    fun getLahan(page: Int) {
+        val id = SharedPref(requireActivity()).getUser()!!.id
+        RetrofitClient.getInstance.getLahan(id).enqueue(object : Callback<GetLahan> {
+            override fun onFailure(call: Call<GetLahan>, t: Throwable) {
+                Toast.makeText(this@HasilFragment.requireContext(), t.message, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onResponse(call: Call<GetLahan>, response: Response<GetLahan>) {
+                val res = response.body()!!
+                if (res.massage.isEmpty()) {
+                    tv_statusLahan.visibility = View.VISIBLE
+                    swipeHasil.setRefreshing(false)
+
+                } else {
+                    swipeHasil.setRefreshing(false)
+                    tv_statusLahan.visibility = View.GONE
+//                    val arrayLahan = ArrayList<GetLahan>()
+                    listLahan = res.massage
+                    displayLahan()
+                    Log.d("hasil", res.massage.toString())
+
+                }
+            }
+        })
     }
 }

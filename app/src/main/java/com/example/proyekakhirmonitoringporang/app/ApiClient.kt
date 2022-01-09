@@ -6,6 +6,8 @@ import com.example.proyekakhirmonitoringporang.api.daftar.RegisterResponse
 import com.example.proyekakhirmonitoringporang.api.getLahan.GetLahan
 import com.example.proyekakhirmonitoringporang.api.inputLahan.InputLahan
 import com.example.proyekakhirmonitoringporang.api.inputLahan.Tanam
+import com.example.proyekakhirmonitoringporang.api.inputPanen.InputPanenRes
+import com.example.proyekakhirmonitoringporang.api.kelompok.KelompokResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -61,6 +63,20 @@ interface ApiClient {
     fun getLahan(
         @Path("id") id: Int
     ):Call<GetLahan>
+
+    @GET("GetKelompok")
+    fun getKelompok(
+
+    ):Call<KelompokResponse>
+
+    @FormUrlEncoded
+    @POST("InputPanen")
+    fun inputPanen(
+        @Field("lahan_id") lahanId: String,
+        @Field("panen_katak") panenKatak: String,
+        @Field("panen_umbi") panenUmbi: String,
+        @Field("tanggal") tanggal: String,
+    ):Call<InputPanenRes>
 
 
 }
