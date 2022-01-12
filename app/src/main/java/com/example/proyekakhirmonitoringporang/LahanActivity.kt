@@ -26,6 +26,7 @@ class LahanActivity : AppCompatActivity() {
     lateinit var rvTampilLahan: RecyclerView
     lateinit var swipeContainer: SwipeRefreshLayout
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lahan)
@@ -76,19 +77,23 @@ class LahanActivity : AppCompatActivity() {
 
     private var listLahan: ArrayList<Massage> = ArrayList()
     fun getLahan(page: Int) {
+        pb_lahan.visibility = View.VISIBLE
         val id = SharedPref(this).getUser()!!.id
         RetrofitClient.getInstance.getLahan(id).enqueue(object : Callback<GetLahan> {
             override fun onFailure(call: Call<GetLahan>, t: Throwable) {
+                pb_lahan.visibility = View.GONE
                 Toast.makeText(this@LahanActivity, t.message, Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(call: Call<GetLahan>, response: Response<GetLahan>) {
                 val res = response.body()!!
                 if (res.massage.isEmpty()) {
+                    pb_lahan.visibility = View.GONE
                     tv_statusLahan.visibility = View.VISIBLE
                     swipeContainer.setRefreshing(false)
 
                 }else{
+                    pb_lahan.visibility = View.GONE
                     swipeContainer.setRefreshing(false)
                     tv_statusLahan.visibility = View.GONE
 //                    val arrayLahan = ArrayList<GetLahan>()

@@ -5,26 +5,31 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.proyekakhirmonitoringporang.api.getLahan.GetLahan
 import com.example.proyekakhirmonitoringporang.api.inputPanen.InputPanenRes
 import com.example.proyekakhirmonitoringporang.app.RetrofitClient
 import com.example.proyekakhirmonitoringporang.databinding.FragmentCatatBinding
+import com.example.proyekakhirmonitoringporang.helper.SharedPref
 import kotlinx.android.synthetic.main.activity_lahan.*
+import kotlinx.android.synthetic.main.fragment_catat.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
-class CatatFragment : Fragment() {
-
+class CatatFragment : Fragment(), AdapterView.OnItemSelectedListener {
     var cal: Calendar = Calendar.getInstance()
     private var tvTanggal: TextView? = null
 
+    private var idListLahan = ArrayList<Int>()
 
     private lateinit var dashboardViewModel: CatatViewModel
     private var _binding: FragmentCatatBinding? = null
@@ -93,6 +98,7 @@ class CatatFragment : Fragment() {
 
 
     private fun catatPanen() {
+        binding.pbCatat.visibility = View.VISIBLE
         RetrofitClient.getInstance.inputPanen(
             binding.inputIdLahan.text.toString(),
             binding.editInptUmbi.text.toString(),
@@ -101,6 +107,7 @@ class CatatFragment : Fragment() {
         ).enqueue(object : Callback<InputPanenRes> {
 
             override fun onFailure(call: Call<InputPanenRes>, t: Throwable) {
+                binding.pbCatat.visibility = View.GONE
                 Toast.makeText(this@CatatFragment.requireContext(), t.message, Toast.LENGTH_SHORT)
                     .show()
             }
@@ -108,6 +115,7 @@ class CatatFragment : Fragment() {
             override fun onResponse(call: Call<InputPanenRes>, response: Response<InputPanenRes>) {
                 val res = response.body()!!
                 if (res.success) {
+                    binding.pbCatat.visibility = View.GONE
                     Toast.makeText(
                         this@CatatFragment.requireContext(),
                         res.message,
@@ -115,6 +123,7 @@ class CatatFragment : Fragment() {
                     ).show()
 
                 } else {
+                    binding.pbCatat.visibility = View.GONE
                     Toast.makeText(
                         this@CatatFragment.requireContext(),
                         res.success.toString(),
@@ -126,8 +135,41 @@ class CatatFragment : Fragment() {
     }
 
 
+    fun getLahan() {
+        val id = SharedPref(this.requireActivity()).getUser()!!.id
+        RetrofitClient.getInstance.getLahan(id).enqueue(object : Callback<GetLahan> {
+            override fun onFailure(call: Call<GetLahan>, t: Throwable) {
+                Toast.makeText(this@CatatFragment.requireContext(), t.message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+            override fun onResponse(call: Call<GetLahan>, response: Response<GetLahan>) {
+                val listResponse = response.body()?.massage
+
+                listResponse?.forEach {
+                    idListLahan.add(it.id)
+                }
+
+                binding.inputIdLahan.onItemSelectedListener = this@CatatFragment
+                val adapter = ArrayAdapter(this@CatatFragment.requireContext(), android.R.layout.simple_spinner_dropdown_item,idListLahan)
+//                binding.inputIdLahan.adapter = adapter
+                binding.inputIdLahan.adapter == adapter
+
+            }
+        })
+    }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        p0?.getItemAtPosition(p2)
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        TODO("Not yet implemented")
     }
 }

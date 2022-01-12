@@ -22,7 +22,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HasilFragment : Fragment() {
+class HasilFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     lateinit var adapterHasil: AdapterHasil
     lateinit var swipeHasil: SwipeRefreshLayout
@@ -40,38 +40,39 @@ class HasilFragment : Fragment() {
 
         rvHasil = view.findViewById(R.id.rv_hasil_catat)
 
-        refresh()!!
+        getLahan()
+
+        swipeHasil = view.findViewById(R.id.swipe_hasil) as SwipeRefreshLayout
+        swipeHasil.setOnRefreshListener(this)
+        swipeHasil.setColorScheme(
+            android.R.color.holo_blue_bright,
+            android.R.color.holo_green_light,
+            android.R.color.holo_orange_light,
+            android.R.color.holo_red_light
+        )
 
         return view
     }
 
-    private fun refresh() {
-        swipeContainer.setOnRefreshListener {
-            // Your code to refresh the list here.
-            // Make sure you call swipeContainer.setRefreshing(false)
-            // once the network request has completed successfully.
-            getLahan(0)
-        }
 
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-            android.R.color.holo_green_light,
-            android.R.color.holo_orange_light,
-            android.R.color.holo_red_light);
-    }
 
     fun displayLahan() {
 
         val layoutManager = LinearLayoutManager(requireContext())
         layoutManager.orientation = LinearLayoutManager.VERTICAL
 
-        rvHasil.adapter = AdapterHasil(listLahan)
+        val layoutManager2 = LinearLayoutManager(requireContext())
+        layoutManager2.orientation = LinearLayoutManager.VERTICAL
+
+        rvHasil.adapter = AdapterLahan(listLahan)
         rvHasil.layoutManager = layoutManager
+        rvHasil.layoutManager = layoutManager2
 
     }
 
     private var listLahan: ArrayList<Massage> = ArrayList()
 
-    fun getLahan(page: Int) {
+    fun getLahan() {
         val id = SharedPref(requireActivity()).getUser()!!.id
         RetrofitClient.getInstance.getLahan(id).enqueue(object : Callback<GetLahan> {
             override fun onFailure(call: Call<GetLahan>, t: Throwable) {
@@ -81,12 +82,11 @@ class HasilFragment : Fragment() {
             override fun onResponse(call: Call<GetLahan>, response: Response<GetLahan>) {
                 val res = response.body()!!
                 if (res.massage.isEmpty()) {
-                    tv_statusLahan.visibility = View.VISIBLE
-                    swipeHasil.setRefreshing(false)
+//                    tv_statusLahan.visibility = View.VISIBLE
+                    Toast.makeText(this@HasilFragment.requireContext(), "Lahan Kosong", Toast.LENGTH_SHORT).show()
 
                 } else {
-                    swipeHasil.setRefreshing(false)
-                    tv_statusLahan.visibility = View.GONE
+//                    tv_statusLahan.visibility = View.GONE
 //                    val arrayLahan = ArrayList<GetLahan>()
                     listLahan = res.massage
                     displayLahan()
@@ -95,5 +95,10 @@ class HasilFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onRefresh() {
+        swipeHasil.isRefreshing = false
+        getLahan()
     }
 }

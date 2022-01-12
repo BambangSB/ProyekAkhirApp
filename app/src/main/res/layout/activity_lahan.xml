@@ -7,11 +7,21 @@
     android:id="@+id/swipeContainer"
     tools:context=".LahanActivity">
 
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/pb_lahan"
+            android:layout_centerInParent="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_statusLahan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

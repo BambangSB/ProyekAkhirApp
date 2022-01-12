@@ -1,5 +1,6 @@
 package com.example.proyekakhirmonitoringporang.adapter
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,10 +35,12 @@ class AdapterLahan(var dataLahan: ArrayList<Massage>) :
         holder.tvNamaLahan.text = dataLahan[position].nama
         holder.tvAlamatLahan.text = dataLahan[position].alamat
         holder.tvLuasLahan.text = dataLahan[position].luas
-//        lateinit var sharedPref: SharedPref
-//        val sp = sharedPref
+
+
 //        val id = sp.getUser()!!.id
-        val image = "http://porasiteam.com/TA/api/GetLahan/" + dataLahan[position].foto
+
+        val id = "6"
+        val image = "http://porasiteam.com/TA/api/GetLahan/6" + dataLahan[position].foto
         Picasso.get()
             .load(image)
             .placeholder(R.drawable.lahan_image_item)

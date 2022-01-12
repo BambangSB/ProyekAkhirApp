@@ -8,6 +8,7 @@ import com.example.proyekakhirmonitoringporang.api.inputLahan.InputLahan
 import com.example.proyekakhirmonitoringporang.api.inputLahan.Tanam
 import com.example.proyekakhirmonitoringporang.api.inputPanen.InputPanenRes
 import com.example.proyekakhirmonitoringporang.api.kelompok.KelompokResponse
+import com.example.proyekakhirmonitoringporang.api.sensor.SensorRespon
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -63,6 +64,11 @@ interface ApiClient {
     fun getLahan(
         @Path("id") id: Int
     ):Call<GetLahan>
+
+    @GET("GetSensor/6")
+    fun getSensor(
+//        @Path("id") id: Int
+    ):Call<SensorRespon>
 
     @GET("GetKelompok")
     fun getKelompok(
