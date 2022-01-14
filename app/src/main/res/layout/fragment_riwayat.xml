@@ -5,21 +5,36 @@
     android:layout_height="match_parent"
     tools:context=".ui.riwayat.RiwayatFragment">
 
+    <ProgressBar
+        android:id="@+id/pb_riwayat"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <TextView
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:id="@+id/tv_riwayat_kosong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Riwayat Kosong" />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_width="match_parent"
         android:id="@+id/swp_riwayat"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_marginVertical="15dp"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="15dp"
+            android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_riwayat"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

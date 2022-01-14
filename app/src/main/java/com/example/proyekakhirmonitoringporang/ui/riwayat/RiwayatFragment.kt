@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +17,7 @@ import com.example.proyekakhirmonitoringporang.adapter.AdapterRiwayat
 import com.example.proyekakhirmonitoringporang.api.sensor.Massage
 import com.example.proyekakhirmonitoringporang.api.sensor.SensorRespon
 import com.example.proyekakhirmonitoringporang.app.RetrofitClient
+import kotlinx.android.synthetic.main.fragment_riwayat.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,6 +27,8 @@ class RiwayatFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     lateinit var rvRiwayat: RecyclerView
     lateinit var riwayatSwipeRefreshLayout: SwipeRefreshLayout
     private var listRiwayat: ArrayList<Massage> = ArrayList()
+    lateinit var pbRiwayat: ProgressBar
+    lateinit var tvRiwayatKosong: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,9 +38,15 @@ class RiwayatFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         val view: View = inflater.inflate(R.layout.fragment_riwayat, container, false)
 
         rvRiwayat = view.findViewById(R.id.rv_riwayat)
+        pbRiwayat = view.findViewById(R.id.pb_riwayat)
+        tvRiwayatKosong = view.findViewById(R.id.tv_riwayat_kosong)
+
+
+        pbRiwayat.visibility = View.VISIBLE
 
         getLahan()
 
+        pbRiwayat.visibility = View.GONE
 
         riwayatSwipeRefreshLayout = view.findViewById(R.id.swp_riwayat) as SwipeRefreshLayout
         riwayatSwipeRefreshLayout.setOnRefreshListener(this)
@@ -59,6 +70,7 @@ class RiwayatFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onRefresh() {
         riwayatSwipeRefreshLayout.isRefreshing = false
+        pbRiwayat.visibility = View.GONE
         getLahan()
     }
 
@@ -68,6 +80,7 @@ class RiwayatFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         RetrofitClient.getInstance.getSensor().enqueue(object : Callback<SensorRespon> {
 
             override fun onFailure(call: Call<SensorRespon>, t: Throwable) {
+                pb_riwayat.visibility = View.GONE
                 Toast.makeText(this@RiwayatFragment.requireContext(), t.message, Toast.LENGTH_SHORT)
                     .show()
             }
@@ -75,16 +88,17 @@ class RiwayatFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             override fun onResponse(call: Call<SensorRespon>, response: Response<SensorRespon>) {
                 val res = response.body()!!
                 if (res.massage.isEmpty()) {
-//                    tv_statusLahan.visibility = View.VISIBLE
+                    pbRiwayat.visibility = View.GONE
+                    tvRiwayatKosong.visibility = View.VISIBLE
                     Toast.makeText(
                         this@RiwayatFragment.requireContext(),
-                        "Lahan Kosong",
+                        "Riwayat Kosong",
                         Toast.LENGTH_SHORT
                     ).show()
 
                 } else {
-//                    tv_statusLahan.visibility = View.GONE
-//                    val arrayLahan = ArrayList<GetLahan>()
+                    pbRiwayat.visibility = View.GONE
+                    tvRiwayatKosong.visibility = View.GONE
                     listRiwayat = res.massage
                     displayRiwayat()
                     Log.d("hasil", res.massage.toString())

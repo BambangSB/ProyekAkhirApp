@@ -90,23 +90,17 @@
                     android:orientation="vertical">
 
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    <Spinner
+                        android:id="@+id/input_id_lahan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:visibility="invisible"
+                        android:id="@+id/tv_id_lahan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Id Lahan"
-                        app:endIconMode="clear_text"
-                        app:errorEnabled="true"
-                        app:startIconDrawable="@drawable/ic_baseline_id"
-                        app:startIconTint="@color/teal_700">
-
-                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                            android:id="@+id/input_id_lahan"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="none" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
+                        android:text="0"/>
 
 
                     <com.google.android.material.textfield.TextInputLayout

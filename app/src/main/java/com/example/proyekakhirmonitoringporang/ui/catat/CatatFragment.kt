@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.proyekakhirmonitoringporang.api.getLahan.GetLahan
@@ -17,6 +14,7 @@ import com.example.proyekakhirmonitoringporang.app.RetrofitClient
 import com.example.proyekakhirmonitoringporang.databinding.FragmentCatatBinding
 import com.example.proyekakhirmonitoringporang.helper.SharedPref
 import kotlinx.android.synthetic.main.activity_lahan.*
+import kotlinx.android.synthetic.main.activity_singup.*
 import kotlinx.android.synthetic.main.fragment_catat.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,6 +36,8 @@ class CatatFragment : Fragment(), AdapterView.OnItemSelectedListener {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    lateinit var pbCatat: ProgressBar
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,6 +54,8 @@ class CatatFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
 
         generalButton()
+
+        getLahan()
 //        getCalendar()
 
 
@@ -98,16 +100,30 @@ class CatatFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
 
     private fun catatPanen() {
+        if (binding.editInptUmbi.text.isNullOrEmpty()) {
+            binding.editInptUmbi.error = "Nama tidak boleh kosong"
+            binding.editInptUmbi.requestFocus() //crusor langsung kesini jika error
+            return //jika nama kosong, tidak eksekusi code selanjutnya
+        } else if (binding.editInptKatak.text.isNullOrEmpty()) {
+            binding.editInptKatak.error = "Email tidak boleh kosong"
+            binding.editInptKatak.requestFocus()
+            return
+        } else if (binding.editTanggalPanen.text.isNullOrEmpty()) {
+            binding.editTanggalPanen.error = "Email tidak boleh kosong"
+            binding.editTanggalPanen.requestFocus()
+            return
+        }
+
         binding.pbCatat.visibility = View.VISIBLE
         RetrofitClient.getInstance.inputPanen(
-            binding.inputIdLahan.text.toString(),
+            binding.tvIdLahan.text.toString(),
             binding.editInptUmbi.text.toString(),
             binding.editInptKatak.text.toString(),
             binding.editTanggalPanen.text.toString()
         ).enqueue(object : Callback<InputPanenRes> {
 
             override fun onFailure(call: Call<InputPanenRes>, t: Throwable) {
-                binding.pbCatat.visibility = View.GONE
+                pbCatat.visibility = View.GONE
                 Toast.makeText(this@CatatFragment.requireContext(), t.message, Toast.LENGTH_SHORT)
                     .show()
             }
@@ -115,7 +131,7 @@ class CatatFragment : Fragment(), AdapterView.OnItemSelectedListener {
             override fun onResponse(call: Call<InputPanenRes>, response: Response<InputPanenRes>) {
                 val res = response.body()!!
                 if (res.success) {
-                    binding.pbCatat.visibility = View.GONE
+                    pbCatat.visibility = View.GONE
                     Toast.makeText(
                         this@CatatFragment.requireContext(),
                         res.message,
@@ -123,7 +139,7 @@ class CatatFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     ).show()
 
                 } else {
-                    binding.pbCatat.visibility = View.GONE
+                    pbCatat.visibility = View.GONE
                     Toast.makeText(
                         this@CatatFragment.requireContext(),
                         res.success.toString(),
@@ -151,9 +167,13 @@ class CatatFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 }
 
                 binding.inputIdLahan.onItemSelectedListener = this@CatatFragment
-                val adapter = ArrayAdapter(this@CatatFragment.requireContext(), android.R.layout.simple_spinner_dropdown_item,idListLahan)
+                val adapter = ArrayAdapter(
+                    this@CatatFragment.requireContext(),
+                    android.R.layout.simple_spinner_dropdown_item,
+                    idListLahan
+                )
 //                binding.inputIdLahan.adapter = adapter
-                binding.inputIdLahan.adapter == adapter
+                binding.inputIdLahan.adapter = adapter
 
             }
         })
@@ -167,6 +187,9 @@ class CatatFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
         p0?.getItemAtPosition(p2)
+        if (p0?.selectedItem == binding.inputIdLahan.selectedItem) {
+            binding.tvIdLahan.text = binding.inputIdLahan.selectedItem.toString()
+        }
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
