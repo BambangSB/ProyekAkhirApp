@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.proyekakhirmonitoringporang.api.Petani
+import com.example.proyekakhirmonitoringporang.api.getLahan.Massage
 import com.google.gson.Gson
 
 class SharedPref(activity: Activity) {
@@ -16,6 +17,9 @@ class SharedPref(activity: Activity) {
     val telepon = "telepon"
 
     val user = "user"
+
+    val lahan = "lahan"
+    val idLahan = "id_lahan"
 
 
     val mypref = "MAIN_PREF"
@@ -32,8 +36,8 @@ class SharedPref(activity: Activity) {
             .apply()
     }
 
-    fun getStatusLogin():Boolean{
-        return sp.getBoolean(login,false)
+    fun getStatusLogin(): Boolean {
+        return sp.getBoolean(login, false)
     }
 
     fun setUser(value: Petani) {
@@ -42,7 +46,7 @@ class SharedPref(activity: Activity) {
     }
 
     fun getUser(): Petani? {
-        val data:String = sp.getString(user, null) ?: return null
+        val data: String = sp.getString(user, null) ?: return null
         return Gson().fromJson<Petani>(data, Petani::class.java)
     }
 
@@ -54,7 +58,25 @@ class SharedPref(activity: Activity) {
         return sp.getString(key, "")!!
     }
 
-    fun clear(){
+    fun setLahan(value: Massage) {
+        val dataLahan: String = Gson().toJson(value, Massage::class.java)
+        sp.edit().putString(lahan, dataLahan).apply()
+    }
+
+    fun getLahan(): Massage? {
+        val dataLahan: String = sp.getString(lahan, null) ?: return null
+        return Gson().fromJson<Massage>(dataLahan, Massage::class.java)
+    }
+
+    fun setIdLahan(key: String, value: String){
+        sp.edit().putString(key, value.toString()).apply()
+    }
+
+    fun getIdLahan(key: String): String {
+        return sp.getString(key, "")!!
+    }
+
+    fun clear() {
         sp.edit().clear().apply()
     }
 

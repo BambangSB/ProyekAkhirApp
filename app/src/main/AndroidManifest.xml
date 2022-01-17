@@ -34,6 +34,7 @@
         <activity android:name=".NotifikasiActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SingupActivity" />
+        <activity android:name=".DetailHasilCatat" />
     </application>
 
 </manifest>

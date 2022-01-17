@@ -4,17 +4,20 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyekakhirmonitoringporang.api.daftar.RegisterResponse
+import com.example.proyekakhirmonitoringporang.api.getLahan.GetLahan
+import com.example.proyekakhirmonitoringporang.api.kelompok.KelompokResponse
 import com.example.proyekakhirmonitoringporang.app.RetrofitClient
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.inyongtisto.myhelper.extension.toMultipartBody
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_singup.*
+import kotlinx.android.synthetic.main.fragment_catat.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
@@ -23,11 +26,14 @@ import retrofit2.Response
 import java.io.File
 
 
-class SingupActivity : AppCompatActivity() {
+class SingupActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private var mProfileUri: File? = null
     lateinit var autoCompleteTextView: AutoCompleteTextView
     lateinit var adapterItems: ArrayAdapter<String>
+
+    private var listIdKelompok = ArrayList<Int>()
+    private val listNamaKelompok = ArrayList<String>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,25 +42,28 @@ class SingupActivity : AppCompatActivity() {
 
         button()
 
-        itemKelompok()
+        getKelompok()
+
+//        itemKelompok()
 
 //        dft_email.doOnTextChanged { text, start, before, count ->
 //            if (text!!.)
 //        }
     }
 
-    private fun itemKelompok() {
-        val type = arrayOf("1", "2", "3")
 
-        val adapter = ArrayAdapter(
-            this,
-            R.layout.item_kelompok_dropdown,
-            type
-        )
-
-        val editTextFilledExposedDropdown = findViewById<AutoCompleteTextView>(R.id.dft_kelompok)
-        editTextFilledExposedDropdown.setAdapter(adapter)
-    }
+//    private fun itemKelompok() {
+//        val type = arrayOf("1", "2", "3", "4")
+//
+//        val adapter = ArrayAdapter(
+//            this,
+//            R.layout.item_kelompok_dropdown,
+//            type
+//        )
+//
+//        val editTextFilledExposedDropdown = findViewById<AutoCompleteTextView>(R.id.dft_kelompok)
+//        editTextFilledExposedDropdown.setAdapter(adapter)
+//    }
 
     private fun button() {
 
@@ -64,7 +73,7 @@ class SingupActivity : AppCompatActivity() {
                 pb_signUp.visibility = View.GONE
                 Toast.makeText(this, "Masukkan Foto Terlebih Dahulu", Toast.LENGTH_SHORT).show()
             } else {
-                uploadFoto(mProfileUri!!)
+                daftarPetani(mProfileUri!!)
 //                Log.d("tag :", waktu.hour.toString())
             }
         }
@@ -114,32 +123,7 @@ class SingupActivity : AppCompatActivity() {
         }
 
 
-    var alertDialog: AlertDialog? = null
-
-
-    private fun dialogUpload2(file: File) {
-        val view = layoutInflater
-        val layout = view.inflate(R.layout.activity_singup, null)
-
-        val revImg: ImageView = layout.findViewById(R.id.dft_imgFoto)
-        val btnAmbilFoto: Button = layout.findViewById(R.id.dft_btn_uploadFoto)
-        val btnUploadFoto: Button = layout.findViewById(R.id.dft_daftar)
-
-        Picasso.get()
-            .load(file)
-            .into(revImg)
-
-        btnAmbilFoto.setOnClickListener {
-            imagePicker()
-        }
-
-        btnUploadFoto.setOnClickListener {
-//            getData()
-            uploadFoto(file)
-        }
-    }
-
-    private fun uploadFoto(file: File) {
+    private fun daftarPetani(file: File) {
 
         if (dft_namalengkap.text!!.isEmpty()) {
             dft_namalengkap.error = "Nama tidak boleh kosong"
@@ -182,8 +166,9 @@ class SingupActivity : AppCompatActivity() {
                         val respon = response.body()!!
                         if (respon.success == 1) {
                             pb_signUp.visibility = View.GONE
-                            Toast.makeText(this@SingupActivity, respon.message, Toast.LENGTH_SHORT)
+                            Toast.makeText(this@SingupActivity, respon.petani.nama + ", Selamat berhasil mendaftar. Tunggu diferivikasi oleh admin", Toast.LENGTH_SHORT)
                                 .show()
+                            startActivity(Intent(this@SingupActivity, WellcomeScreen::class.java))
                         } else if (respon.success == 0) {
                             pb_signUp.visibility = View.GONE
                             Toast.makeText(this@SingupActivity, respon.message, Toast.LENGTH_SHORT)
@@ -207,17 +192,59 @@ class SingupActivity : AppCompatActivity() {
 
     }
 
+    private fun getKelompok() {
+        RetrofitClient.getInstance.getKelompok().enqueue(object : Callback<KelompokResponse> {
 
-    private fun moveWellcome() {
-        startActivity(Intent(this, WellcomeScreen::class.java))
-        finish()
+            override fun onFailure(call: Call<KelompokResponse>, t: Throwable) {
+                Toast.makeText(this@SingupActivity, t.message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+            override fun onResponse(
+                call: Call<KelompokResponse>,
+                response: Response<KelompokResponse>
+            ) {
+                val listResponse = response.body()?.massage
+
+                listResponse?.forEach {
+                    listIdKelompok.add(it.id)
+                    listNamaKelompok.add(it.nama)
+                }
+
+                spin_daftar.onItemSelectedListener = this@SingupActivity
+                val adapter = ArrayAdapter(
+                    this@SingupActivity,
+                    android.R.layout.simple_spinner_dropdown_item,
+                    listIdKelompok
+                )
+//                binding.inputIdLahan.adapter = adapter
+                spin_daftar.adapter = adapter
+            }
+        })
     }
+
 
     private fun moveLogin() {
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
 
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        p0?.getItemAtPosition(p2)
+        if (p0?.selectedItem == spin_daftar.selectedItem) {
+            dft_kelompok.text = spin_daftar.selectedItem.toString()
+            showNamaKelompok(listNamaKelompok[p2])
+        }
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        TODO("Not yet implemented")
+    }
+
+    private fun showNamaKelompok(namaKelompok: String) {
+        Log.d("tes", namaKelompok)
+        tv_daftarNamaKelTani.text = namaKelompok
+    }
 
 
 }

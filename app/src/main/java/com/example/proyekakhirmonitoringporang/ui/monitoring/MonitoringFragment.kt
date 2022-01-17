@@ -1,17 +1,18 @@
 package com.example.proyekakhirmonitoringporang.ui.monitoring
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.proyekakhirmonitoringporang.LahanActivity
 import com.example.proyekakhirmonitoringporang.R
-import com.example.proyekakhirmonitoringporang.api.getLahan.GetLahan
-import com.example.proyekakhirmonitoringporang.api.sensor.Massage
 import com.example.proyekakhirmonitoringporang.api.sensor.SensorRespon
 import com.example.proyekakhirmonitoringporang.app.RetrofitClient
 import com.example.proyekakhirmonitoringporang.databinding.FragmentMonitoringBinding
@@ -31,6 +32,7 @@ class MonitoringFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     lateinit var nPh: TextView
 
     lateinit var swipeLayout: SwipeRefreshLayout
+    lateinit var pbMonitoring: ProgressBar
 
     private lateinit var homeViewModel: MonitoringViewModel
     private var _binding: FragmentMonitoringBinding? = null
@@ -45,7 +47,9 @@ class MonitoringFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         init(view)
         setData()
 
-        pb_monitoring.visibility = View.VISIBLE
+        pbMonitoring = view.findViewById(R.id.pb_monitoring)
+
+
 
         nKelembapan = view.findViewById(R.id.nilaiKelembapan)
         nPh = view.findViewById(R.id.nilaiPh)
@@ -65,32 +69,41 @@ class MonitoringFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
 
-
     fun getSensor() {
+        pbMonitoring.visibility = View.VISIBLE
         //        val id = SharedPref(this.requireActivity()).getUser()!!.id
         RetrofitClient.getInstance.getSensor().enqueue(object : Callback<SensorRespon> {
 
             override fun onFailure(call: Call<SensorRespon>, t: Throwable) {
-                pb_monitoring.visibility = View.GONE
+                pbMonitoring.visibility = View.GONE
                 Toast.makeText(
-                    this@MonitoringFragment.requireContext(),
+                    this@MonitoringFragment.requireActivity(),
                     t.message,
                     Toast.LENGTH_SHORT
                 ).show()
+
+//                startActivity(
+//                    Intent(
+//                        this@MonitoringFragment.requireActivity(),
+//                        LahanActivity::class.java
+//                    )
+//                )
             }
 
             override fun onResponse(call: Call<SensorRespon>, response: Response<SensorRespon>) {
                 val res = response.body()!!
                 if (res.massage.isEmpty()) {
-                    pb_monitoring.visibility = View.GONE
+                    pbMonitoring.visibility = View.GONE
                     Toast.makeText(
                         this@MonitoringFragment.requireContext(),
-                        "Nilai Sensor Kosong",
-                        Toast.LENGTH_SHORT
+                        "Nilai sensor kosong, Cek hardware/lahn" +
+                        res.success.toString(),
+                        Toast.LENGTH_LONG
                     ).show()
 
+
                 } else {
-                    pb_monitoring.visibility = View.GONE
+                    pbMonitoring.visibility = View.GONE
                     nKelembapan.text = response.body()!!.massage.last().kelembapan.toString()
                     nPh.text = response.body()!!.massage.last().ph.toString()
                     Log.d("hasil", res.massage.toString())

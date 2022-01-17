@@ -11,7 +11,8 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_centerInParent="true"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:progressTint="@color/primary_dark"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -76,7 +77,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_baseline_account_circle_24"
+                    android:src="@drawable/ic_baseline_people_24"
                     app:tint="@color/primary" />
 
                 <TextView

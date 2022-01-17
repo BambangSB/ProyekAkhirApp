@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -35,6 +36,7 @@ class TambahLahan : AppCompatActivity() {
 
     lateinit var idPetani: TextView
     lateinit var idKelompok: TextView
+    lateinit var pbTambahLahan: ProgressBar
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +44,7 @@ class TambahLahan : AppCompatActivity() {
         setContentView(R.layout.activity_tambah_lahan)
 
         s = SharedPref(this)
+
 
         init()
         setData()
@@ -52,6 +55,7 @@ class TambahLahan : AppCompatActivity() {
     private fun init() {
         idPetani = findViewById<EditText>(R.id.il_idPetani)
         idKelompok = findViewById<EditText>(R.id.il_idKelompok)
+        pbTambahLahan = findViewById(R.id.pb_tambahLahan)
     }
 
     fun setData() {
@@ -74,15 +78,14 @@ class TambahLahan : AppCompatActivity() {
         }
 
         il_btn_tambahLahan.setOnClickListener {
-            pb_tambahLahan.visibility = View.VISIBLE
+            pbTambahLahan.visibility = View.VISIBLE
             if (mProfileUri == null) {
-                pb_tambahLahan.visibility = View.GONE
+                pbTambahLahan.visibility = View.GONE
                 Toast.makeText(this, "Masukkan Foto Terlebih Dahulu", Toast.LENGTH_SHORT).show()
             } else {
-                pb_tambahLahan.visibility = View.GONE
+                pbTambahLahan.visibility = View.GONE
                 uploadFoto(mProfileUri!!)
                 startActivity(Intent(this, LahanActivity::class.java))
-                finishAffinity()
 //                Log.d("tag :", waktu.hour.toString())
             }
 
@@ -145,7 +148,7 @@ class TambahLahan : AppCompatActivity() {
             return
         }
 
-        pb_tambahLahan.visibility = View.VISIBLE
+        pbTambahLahan.visibility = View.VISIBLE
 
         val fileImage = file.toMultipartBody("foto")
         RetrofitClient.getInstance.inputLahan(
@@ -163,15 +166,15 @@ class TambahLahan : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val respon = response.body()!!
                         if (respon.success == true) {
-                            pb_tambahLahan.visibility = View.GONE
+                            pbTambahLahan.visibility = View.GONE
                             Toast.makeText(this@TambahLahan, respon.message, Toast.LENGTH_LONG)
                                 .show()
                         } else if (respon.success == false) {
-                            pb_tambahLahan.visibility = View.GONE
+                            pbTambahLahan.visibility = View.GONE
                             Toast.makeText(this@TambahLahan, respon.message, Toast.LENGTH_LONG)
                                 .show()
                         } else {
-                            pb_tambahLahan.visibility = View.GONE
+                            pbTambahLahan.visibility = View.GONE
                             Toast.makeText(this@TambahLahan, respon.message, Toast.LENGTH_LONG)
                                 .show()
                         }
@@ -179,7 +182,7 @@ class TambahLahan : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<InputLahan>, t: Throwable) {
-                    pb_tambahLahan.visibility = View.GONE
+                    pbTambahLahan.visibility = View.GONE
                     Toast.makeText(
                         this@TambahLahan, "Error: " + t.message, Toast.LENGTH_LONG
                     ).show()

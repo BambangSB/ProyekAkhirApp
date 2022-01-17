@@ -1,12 +1,15 @@
 package com.example.proyekakhirmonitoringporang.adapter
 
 import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.proyekakhirmonitoringporang.DetailHasilCatat
 import com.example.proyekakhirmonitoringporang.R
 import com.example.proyekakhirmonitoringporang.api.getLahan.Massage
 import com.example.proyekakhirmonitoringporang.helper.SharedPref
@@ -47,6 +50,8 @@ class AdapterLahan(var dataLahan: ArrayList<Massage>) :
             .error(R.drawable.lahan_error_item)
             .into(holder.imgLahan)
 //        holder.imgLahan.setImageResource(data[1].massage[position])
+
+
 
     }
 

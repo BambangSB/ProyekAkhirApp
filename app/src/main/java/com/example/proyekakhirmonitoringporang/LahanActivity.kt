@@ -1,5 +1,6 @@
 package com.example.proyekakhirmonitoringporang
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -25,6 +26,7 @@ class LahanActivity : AppCompatActivity() {
     lateinit var adapter: AdapterLahan
     lateinit var rvTampilLahan: RecyclerView
     lateinit var swipeContainer: SwipeRefreshLayout
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

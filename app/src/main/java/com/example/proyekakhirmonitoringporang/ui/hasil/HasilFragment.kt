@@ -24,9 +24,10 @@ import retrofit2.Response
 
 class HasilFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
-    lateinit var adapterHasil: AdapterHasil
+
     lateinit var swipeHasil: SwipeRefreshLayout
     lateinit var rvHasil: RecyclerView
+    lateinit var s: SharedPref
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,10 +36,11 @@ class HasilFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_hasil, container, false)
 
+        s = SharedPref(this.requireActivity())
 
         swipeHasil = view.findViewById(R.id.swipe_hasil)
 
-        rvHasil = view.findViewById(R.id.rv_hasil_catat)
+        rvHasil = view.findViewById(R.id.rv_hasil)
 
         getLahan()
 
@@ -56,7 +58,7 @@ class HasilFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
 
 
-    fun displayLahan() {
+    fun displayLahanHasil() {
 
         val layoutManager = LinearLayoutManager(requireContext())
         layoutManager.orientation = LinearLayoutManager.VERTICAL
@@ -64,7 +66,7 @@ class HasilFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         val layoutManager2 = LinearLayoutManager(requireContext())
         layoutManager2.orientation = LinearLayoutManager.VERTICAL
 
-        rvHasil.adapter = AdapterLahan(listLahan)
+        rvHasil.adapter = AdapterHasil(requireActivity(),listLahan)
         rvHasil.layoutManager = layoutManager
         rvHasil.layoutManager = layoutManager2
 
@@ -82,14 +84,12 @@ class HasilFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             override fun onResponse(call: Call<GetLahan>, response: Response<GetLahan>) {
                 val res = response.body()!!
                 if (res.massage.isEmpty()) {
-//                    tv_statusLahan.visibility = View.VISIBLE
                     Toast.makeText(this@HasilFragment.requireContext(), "Lahan Kosong", Toast.LENGTH_SHORT).show()
 
                 } else {
-//                    tv_statusLahan.visibility = View.GONE
-//                    val arrayLahan = ArrayList<GetLahan>()
                     listLahan = res.massage
-                    displayLahan()
+                    displayLahanHasil()
+                    s.setString(s.idLahan, res.massage[0].id.toString())
                     Log.d("hasil", res.massage.toString())
 
                 }

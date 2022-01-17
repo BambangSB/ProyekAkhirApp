@@ -2,6 +2,7 @@ package com.example.proyekakhirmonitoringporang.ui.catat
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,7 @@ class CatatFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var tvTanggal: TextView? = null
 
     private var idListLahan = ArrayList<Int>()
+    private val listNamaLahan = ArrayList<String>()
 
     private lateinit var dashboardViewModel: CatatViewModel
     private var _binding: FragmentCatatBinding? = null
@@ -164,6 +166,7 @@ class CatatFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
                 listResponse?.forEach {
                     idListLahan.add(it.id)
+                    listNamaLahan.add(it.nama)
                 }
 
                 binding.inputIdLahan.onItemSelectedListener = this@CatatFragment
@@ -189,7 +192,13 @@ class CatatFragment : Fragment(), AdapterView.OnItemSelectedListener {
         p0?.getItemAtPosition(p2)
         if (p0?.selectedItem == binding.inputIdLahan.selectedItem) {
             binding.tvIdLahan.text = binding.inputIdLahan.selectedItem.toString()
+            showNamaLahan(listNamaLahan[p2])
         }
+    }
+
+    private fun showNamaLahan(namaLahan: String) {
+        Log.d("tes", namaLahan)
+        binding.inputNamaLahan.text = namaLahan
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {

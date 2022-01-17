@@ -42,11 +42,11 @@ class RiwayatFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         tvRiwayatKosong = view.findViewById(R.id.tv_riwayat_kosong)
 
 
-        pbRiwayat.visibility = View.VISIBLE
+
 
         getLahan()
 
-        pbRiwayat.visibility = View.GONE
+
 
         riwayatSwipeRefreshLayout = view.findViewById(R.id.swp_riwayat) as SwipeRefreshLayout
         riwayatSwipeRefreshLayout.setOnRefreshListener(this)
@@ -76,11 +76,13 @@ class RiwayatFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
 
     private fun getLahan() {
+        pbRiwayat.visibility = View.VISIBLE
 //        val id = SharedPref(requireActivity()).getUser()!!.id
         RetrofitClient.getInstance.getSensor().enqueue(object : Callback<SensorRespon> {
 
             override fun onFailure(call: Call<SensorRespon>, t: Throwable) {
-                pb_riwayat.visibility = View.GONE
+                pbRiwayat.visibility = View.GONE
+                tvRiwayatKosong.visibility = View.VISIBLE
                 Toast.makeText(this@RiwayatFragment.requireContext(), t.message, Toast.LENGTH_SHORT)
                     .show()
             }
