@@ -3,9 +3,14 @@ package com.example.proyekakhirmonitoringporang.helper
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.util.Base64
+import android.widget.ImageView
+import androidx.core.graphics.drawable.toBitmap
 import com.example.proyekakhirmonitoringporang.api.Petani
 import com.example.proyekakhirmonitoringporang.api.getLahan.Massage
 import com.google.gson.Gson
+import java.io.ByteArrayOutputStream
 
 class SharedPref(activity: Activity) {
 
@@ -25,9 +30,22 @@ class SharedPref(activity: Activity) {
     val mypref = "MAIN_PREF"
     val sp: SharedPreferences //sebagai shared preference
 
+
     init {
         //tambahkan value sp nya
         sp = activity.getSharedPreferences(mypref, Context.MODE_PRIVATE)
+    }
+
+    fun saveImage(imageView: ImageView, context: Context) {
+        val baos = ByteArrayOutputStream()
+        val bitmap = imageView.drawable.toBitmap()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
+        val encodedImage = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT)
+
+        with(sp.edit()) {
+            putString("encodedImage", encodedImage)
+            apply()
+        }
     }
 
     fun setStatusLogin(status: Boolean) {
@@ -68,7 +86,7 @@ class SharedPref(activity: Activity) {
         return Gson().fromJson<Massage>(dataLahan, Massage::class.java)
     }
 
-    fun setIdLahan(key: String, value: String){
+    fun setIdLahan(key: String, value: String) {
         sp.edit().putString(key, value.toString()).apply()
     }
 

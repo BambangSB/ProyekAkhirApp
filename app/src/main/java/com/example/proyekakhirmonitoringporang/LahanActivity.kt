@@ -85,6 +85,7 @@ class LahanActivity : AppCompatActivity() {
             override fun onFailure(call: Call<GetLahan>, t: Throwable) {
                 pb_lahan.visibility = View.GONE
                 Toast.makeText(this@LahanActivity, t.message, Toast.LENGTH_SHORT).show()
+                swipeContainer.setRefreshing(false)
             }
 
             override fun onResponse(call: Call<GetLahan>, response: Response<GetLahan>) {

@@ -13,6 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
 
@@ -22,19 +23,27 @@
                 android:layout_height="80dp"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginVertical="15dp"
-                android:src="@drawable/ic_baseline_android_24" />
+                android:src="@drawable/rv_riwayat" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginVertical="15dp"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_namaLahan_riwayat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:text="Nama Lahan" />
+
+                <TextView
                     android:id="@+id/tv_tanggalMonitoring"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:ellipsize="marquee"
                     android:text="Tanggal monitoring" />
 
@@ -87,72 +96,160 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/black" />
+            android:layout_marginHorizontal="8dp"
+            android:background="#ECECEC" />
 
-        <LinearLayout
-            android:layout_marginVertical="14dp"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="14dp"
-            android:orientation="vertical">
+            android:layout_marginTop="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="8dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Informasi :" />
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_marginLeft="12dp"
-                    android:id="@+id/info_kelembapan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="kelmbapan"
-                    android:textColor="@color/primary"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Informasi"
+                        android:textColor="@color/oren" />
 
-                <TextView
-                    android:layout_marginLeft="12dp"
-                    android:id="@+id/info_ph"
-                    android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Kelembapan : " />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/info_kelembapan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="kelmbapan"
+                            android:textColor="@color/primary" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="pH Tanah : " />
+
+                            <TextView
+                                android:id="@+id/info_ph"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="ph"
+                                android:textColor="@color/primary" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="ph"
-                    android:textColor="@color/primary"/>
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="75dp"
+                        android:background="#ECECEC" />
+
+                    <LinearLayout
+                        android:layout_marginLeft="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rekomendasi"
+                            android:textColor="@color/blue" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Kelembapan : " />
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/rekom_kelembapan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="kelmbapan"
+                                android:textColor="@color/primary" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="pH Tanah : " />
+
+                                <TextView
+                                    android:id="@+id/rekom_ph"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="ph"
+                                    android:textColor="@color/primary" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rekomendasi :" />
-
-                <TextView
-                    android:layout_marginLeft="12dp"
-                    android:id="@+id/rekom_kelembapan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="kelmbapan"
-                    android:textColor="@color/primary"/>
-
-                <TextView
-                    android:layout_marginLeft="12dp"
-                    android:id="@+id/rekom_ph"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ph"
-                    android:textColor="@color/primary"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 

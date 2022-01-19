@@ -2,6 +2,8 @@ package com.example.proyekakhirmonitoringporang.app
 
 import android.media.Image
 import com.example.proyekakhirmonitoringporang.api.LoginResponse
+import com.example.proyekakhirmonitoringporang.api.bibitPorang.AmbilPesanan
+import com.example.proyekakhirmonitoringporang.api.bibitPorang.KirimPesanan
 import com.example.proyekakhirmonitoringporang.api.daftar.RegisterResponse
 import com.example.proyekakhirmonitoringporang.api.getLahan.GetLahan
 import com.example.proyekakhirmonitoringporang.api.inputLahan.InputLahan
@@ -84,5 +86,18 @@ interface ApiClient {
         @Field("tanggal") tanggal: String,
     ):Call<InputPanenRes>
 
+    @FormUrlEncoded
+    @POST("InputPesanan")
+    fun inputPesanan(
+        @Field("petani_id") petaniId: String,
+        @Field("bibit_id") bibitId: String,
+        @Field("stok_katak") stokKatak: String,
+        @Field("stok_umbi") stokUmbi: String,
+    ):Call<KirimPesanan>
+
+    @GET("GetPesanan/{id}")
+    fun getPesanan(
+        @Path("id") id: Int
+    ):Call<AmbilPesanan>
 
 }

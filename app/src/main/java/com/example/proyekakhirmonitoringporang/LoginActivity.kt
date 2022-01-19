@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
             edit_email.requestFocus()
             return
         } else if (edit_password.text!!.isEmpty()) {
-            edit_password.error = "Nama tidak boleh kosong"
+            edit_password.error = "Password tidak boleh kosong"
             edit_password.requestFocus() //crusor langsung kesini jika error
             return //jika nama kosong, tidak eksekusi code selanjutnya
         }
@@ -67,17 +67,17 @@ class LoginActivity : AppCompatActivity() {
 
                     moveIntent()
                     finishAffinity()
-                    Toast.makeText(this@LoginActivity, respon.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, respon.message, Toast.LENGTH_LONG).show()
                 } else {
                     pb_signIn.visibility = View.GONE
-                    Toast.makeText(this@LoginActivity, respon.message, Toast.LENGTH_SHORT)
+                    Toast.makeText(this@LoginActivity, respon.message + ", tunggu konfirmasi maksimal 1x24 jam", Toast.LENGTH_LONG)
                         .show()
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 pb_signIn.visibility = View.GONE
-                Toast.makeText(this@LoginActivity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, t.message, Toast.LENGTH_LONG).show()
             }
 
         })

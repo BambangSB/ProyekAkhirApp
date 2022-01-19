@@ -17,5 +17,10 @@ data class Massage(
     @SerializedName("rekom_kelembapan")
     val rekomKelembapan: String,
     @SerializedName("rekom_ph")
-    val rekomPh: String
+    val rekomPh: String,
+    @SerializedName("nama")
+    val nama: String,
+    @SerializedName("tanggal")
+    val tanggal: String
+
 )

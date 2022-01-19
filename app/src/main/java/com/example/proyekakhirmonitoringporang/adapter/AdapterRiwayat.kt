@@ -12,6 +12,7 @@ import com.example.proyekakhirmonitoringporang.api.sensor.Massage
 class AdapterRiwayat(var data: ArrayList<Massage>): RecyclerView.Adapter<AdapterRiwayat.Holder>() {
 
     class Holder(view: View):RecyclerView.ViewHolder(view) {
+        val tvNamaLahan = view.findViewById<TextView>(R.id.tv_namaLahan_riwayat)
         val tvTanggal = view.findViewById<TextView>(R.id.tv_tanggalMonitoring)
         val tvKelembaban = view.findViewById<TextView>(R.id.tv_kelembabanMonitoring)
         val tvPh = view.findViewById<TextView>(R.id.ph_Monitoring)
@@ -29,7 +30,8 @@ class AdapterRiwayat(var data: ArrayList<Massage>): RecyclerView.Adapter<Adapter
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.tvTanggal.text = data[position].lahanId.toString()
+        holder.tvNamaLahan.text = data[position].nama
+        holder.tvTanggal.text = data[position].tanggal
         holder.tvKelembaban.text = data[position].kelembapan.toString()
         holder.tvPh.text = data[position].ph.toString()
 //        holder.imgRiwayat.setImageResource(data[position].gambar)

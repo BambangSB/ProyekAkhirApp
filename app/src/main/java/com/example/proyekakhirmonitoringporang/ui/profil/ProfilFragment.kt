@@ -11,6 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.proyekakhirmonitoringporang.LahanActivity
 import com.example.proyekakhirmonitoringporang.R
 import com.example.proyekakhirmonitoringporang.WellcomeScreen
+import com.example.proyekakhirmonitoringporang.activityprofil.AboutUs
+import com.example.proyekakhirmonitoringporang.activityprofil.BibitPorang
+import com.example.proyekakhirmonitoringporang.activityprofil.ProfilInfo
+import com.example.proyekakhirmonitoringporang.activityprofil.WebPorasiteam
 import com.example.proyekakhirmonitoringporang.databinding.FragmentProfilBinding
 import com.example.proyekakhirmonitoringporang.helper.SharedPref
 import kotlinx.android.synthetic.main.fragment_profil.*
@@ -93,6 +97,26 @@ class ProfilFragment : Fragment() {
 
         btn_lahan_profil.setOnClickListener {
             val intent = Intent(activity, LahanActivity::class.java)
+            activity?.startActivity(intent)
+        }
+
+        btn_profil_info.setOnClickListener {
+            val intent = Intent(activity, ProfilInfo::class.java)
+            activity?.startActivity(intent)
+        }
+
+        btn_pr_website.setOnClickListener {
+            val intent = Intent(activity, WebPorasiteam::class.java)
+            activity?.startActivity(intent)
+        }
+
+        btn_pr_aboutUs.setOnClickListener {
+            val intent = Intent(activity, AboutUs::class.java)
+            activity?.startActivity(intent)
+        }
+
+        btn_pr_bibit.setOnClickListener {
+            val intent = Intent(activity, BibitPorang::class.java)
             activity?.startActivity(intent)
         }
 

@@ -71,21 +71,24 @@
                 android:textColor="@color/white" />
 
             <androidx.cardview.widget.CardView
-                android:layout_marginTop="35dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="1dp"
+                android:layout_marginTop="35dp"
                 android:layout_marginBottom="2dp"
                 android:elevation="3dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:paddingHorizontal="20dp"
-                    android:paddingVertical="20dp"
-                    android:orientation="vertical">
+                    android:paddingVertical="20dp">
 
                     <RelativeLayout
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:id="@+id/btn_pr_profilInfo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -93,6 +96,7 @@
                         android:gravity="center_vertical">
 
                         <LinearLayout
+                            android:id="@+id/btn_profil_info"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
@@ -109,20 +113,22 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
-                                android:text="Profile Info"
-                                />
+                                android:text="Profile Info" />
 
                         </LinearLayout>
 
                         <ImageView
-                            android:layout_alignParentRight="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_chevron_right_24"/>
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/ic_baseline_chevron_right_24" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:id="@+id/btn_pr_lahan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -134,34 +140,37 @@
                             android:id="@+id/btn_lahan_profil"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
                             android:clickable="true"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <ImageView
-                                app:tint="@color/primary"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:contentDescription="Profile Info"
-                                android:src="@drawable/ic_baseline_lahan_24" />
+                                android:src="@drawable/ic_baseline_lahan_24"
+                                app:tint="@color/primary" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
-                                android:text="Lahan"/>
+                                android:text="Lahan" />
 
                         </LinearLayout>
 
                         <ImageView
-                            android:layout_alignParentRight="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_chevron_right_24"/>
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/ic_baseline_chevron_right_24" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:id="@+id/btn_pr_bibit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -176,50 +185,52 @@
                             android:orientation="horizontal">
 
                             <ImageView
-                                app:tint="@color/primary"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:contentDescription="Profile Info"
-                                android:src="@drawable/ic_baseline_bibit_24" />
+                                android:src="@drawable/ic_baseline_bibit_24"
+                                app:tint="@color/primary" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
-                                android:text="Bibit Porang"/>
+                                android:text="Bibit Porang" />
 
                         </LinearLayout>
 
                         <ImageView
-                            android:layout_alignParentRight="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_chevron_right_24"/>
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/ic_baseline_chevron_right_24" />
 
                     </RelativeLayout>
 
                 </LinearLayout>
 
 
-
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="1dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="2dp"
                 android:elevation="3dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:paddingHorizontal="20dp"
-                    android:paddingVertical="20dp"
-                    android:orientation="vertical">
+                    android:paddingVertical="20dp">
 
                     <RelativeLayout
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:id="@+id/btn_pr_website"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -233,29 +244,32 @@
                             android:orientation="horizontal">
 
                             <ImageView
-                                app:tint="@color/primary"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:contentDescription="Web Porasitem"
-                                android:src="@drawable/ic_baseline_language_24" />
+                                android:src="@drawable/ic_baseline_language_24"
+                                app:tint="@color/primary" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
-                                android:text="Web Porasitem"/>
+                                android:text="Web Porasitem" />
 
                         </LinearLayout>
 
                         <ImageView
-                            android:layout_alignParentRight="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_chevron_right_24"/>
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/ic_baseline_chevron_right_24" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:id="@+id/btn_pr_aboutUs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -270,31 +284,30 @@
                             android:orientation="horizontal">
 
                             <ImageView
-                                app:tint="@color/primary"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:contentDescription="About Us"
-                                android:src="@drawable/ic_baseline_info_24" />
+                                android:src="@drawable/ic_baseline_info_24"
+                                app:tint="@color/primary" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
-                                android:text="About Us"/>
+                                android:text="About Us" />
 
                         </LinearLayout>
 
                         <ImageView
-                            android:layout_alignParentRight="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_chevron_right_24"/>
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/ic_baseline_chevron_right_24" />
 
                     </RelativeLayout>
 
 
                 </LinearLayout>
-
 
 
             </androidx.cardview.widget.CardView>
@@ -304,22 +317,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
+                android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="Sign Out"
                 android:gravity="center_horizontal"
+                android:text="Sign Out"
                 android:textColor="@color/warning"
                 android:textSize="18sp" />
 
 
             <TextView
-                android:textSize="12dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Verison 1.0.0"/>
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
+                android:text="Verison 1.0.0"
+                android:textSize="12dp" />
 
         </LinearLayout>
 

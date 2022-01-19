@@ -166,16 +166,16 @@ class SingupActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         val respon = response.body()!!
                         if (respon.success == 1) {
                             pb_signUp.visibility = View.GONE
-                            Toast.makeText(this@SingupActivity, respon.petani.nama + ", Selamat berhasil mendaftar. Tunggu diferivikasi oleh admin", Toast.LENGTH_SHORT)
+                            Toast.makeText(this@SingupActivity, respon.petani.nama + ", Selamat berhasil mendaftar. Tunggu diferivikasi oleh admin", Toast.LENGTH_LONG)
                                 .show()
                             startActivity(Intent(this@SingupActivity, WellcomeScreen::class.java))
                         } else if (respon.success == 0) {
                             pb_signUp.visibility = View.GONE
-                            Toast.makeText(this@SingupActivity, respon.message, Toast.LENGTH_SHORT)
+                            Toast.makeText(this@SingupActivity, respon.message, Toast.LENGTH_LONG)
                                 .show()
                         } else {
                             pb_signUp.visibility = View.GONE
-                            Toast.makeText(this@SingupActivity, respon.message, Toast.LENGTH_SHORT)
+                            Toast.makeText(this@SingupActivity, respon.message, Toast.LENGTH_LONG)
                                 .show()
                         }
                     }
@@ -184,7 +184,7 @@ class SingupActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                     pb_signUp.visibility = View.GONE
                     Toast.makeText(
-                        this@SingupActivity, "Error: " + t.message, Toast.LENGTH_SHORT
+                        this@SingupActivity, "Error: " + t.message, Toast.LENGTH_LONG
                     ).show()
                 }
 

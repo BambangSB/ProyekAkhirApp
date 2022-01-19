@@ -20,5 +20,17 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="desc_tambah_lahan">Silahkan isi form berikut untuk menambahkan lahan</string>
     <string name="catat_hasil_panen">Isi form berikut untuk mencatat hasil panen</string>
+    <string name="thanks_to">
+        - Allah SWT.\n<br/>
+        - Our Parents\n<br/>
+        - Our Lecturer Mentor\n<br/>
+        - and All Our Friends
+
+    </string>
+    <string name="team">
+        - Husnul Alfaini\n<br/>
+        - Bambang Setya Budi\n<br/>
+        - Sandi Agus Triono</string>
+    <string name="helper_pesanKatak">*Jika tidak pesan, isi dengan "0"</string>
 
 </resources>
